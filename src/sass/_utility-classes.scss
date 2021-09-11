@@ -9,8 +9,33 @@
   overflow: hidden;
 }
 
-.list-style {
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.list {
   list-style: none;
-  padding-left: 0;
   margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+img {
+  display: block;
 }
