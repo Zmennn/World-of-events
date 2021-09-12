@@ -1,5 +1,9 @@
 import './sass/main.scss';
 
+import countrySearch from './js/countrySearch';
+
+import { fetchObj } from './fetch'
+
 
 
 //Импорт и вызов нотифашки, образец
@@ -18,3 +22,36 @@ function venueSearch(key) {
         .then(data => console.log(data._embedded.venues));
 }
 venueSearch('Uk');
+
+
+
+
+const eventProcessing = {
+    dataRequest: {},
+
+    standardRequest(country, text) {
+        this.dataRequest = {};
+        if (country !== "") {
+            this.dataRequest.countryCode = country
+        };
+        if (text !== "") {
+            this.dataRequest.keyword = text
+        };
+
+
+        fetchObj.creatingRequest(this.dataRequest)
+            .then(res => responseProcessing.avfun(res));
+    }
+}
+
+async function avfun(res) { console.log(res); }
+
+// eventProcessing.standardRequest("US", "")
+
+
+const responseProcessing = {
+    async avfun(res) { console.log(res); }
+}
+
+
+
