@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import { fetchObj } from './fetch'
 
 
 
@@ -17,4 +18,33 @@ function venueSearch(key) {
         .then(response => response.json())
         .then(data => console.log(data._embedded.venues));
 }
-venueSearch('Uk');
+// venueSearch('Uk');
+
+
+
+
+const eventProcessing = {
+    dataRequest: {},
+
+    standardRequest(country, text) {
+        this.dataRequest = {};
+        if (country !== "") {
+            this.dataRequest.countryCode = country
+        };
+        if (text !== "") {
+            this.dataRequest.keyword = text
+        };
+
+        fetchObj.creatingRequest(this.dataRequest)
+            .then((c) => console.log(c))
+
+    }
+}
+
+// eventProcessing.standardRequest("US", "")
+
+
+
+
+
+
