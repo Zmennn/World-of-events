@@ -8,6 +8,8 @@ onErrorNotification("test");
 
 
 
+
+//Временный костыль для создания верстки, консоль заменить на вызов шаблона
 function venueSearch(key) {
     fetch(
         `https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}`,
@@ -15,5 +17,4 @@ function venueSearch(key) {
         .then(response => response.json())
         .then(data => console.log(data._embedded.venues));
 }
-let e = venueSearch('Uk');
-console.log(e, 'www');
+venueSearch('Uk');
