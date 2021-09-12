@@ -168,7 +168,7 @@ const countryCodes = [
 
 import getRefs from './get-refs';
 const refs = getRefs();
-console.log(countryCodes[0].code);
+
 const newArray = [];
 
 function eventSearch(countryCode) {

@@ -1,7 +1,9 @@
+import { eventProcessing } from "./index";
+
 import axios from "axios";
 
 
-
+console.log(eventProcessing);
 
 export const fetchObj = {
 
