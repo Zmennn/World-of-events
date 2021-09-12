@@ -1,0 +1,37 @@
+.event-grid {
+  padding: 0;
+  margin: 0 auto;
+  display: grid;
+  justify-content: center;
+  //  если нужно до следующего перелома жестко зафиксить размер карточки
+  grid-template-columns: repeat(2, 138px);
+  //  если до следующего перелома размер карточки будет растягиваться и их остается 2
+  //   grid-template-columns: repeat(2, minmax(138px, 1fr));
+
+  //  если до следующего перелома размер карточки будет фиксированным,
+  //  но количество в строке будет увеличиваться
+  //  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
+  grid-gap: 30px 4px;
+
+  @include tablet {
+    grid-template-columns: repeat(3, 194px);
+    grid-gap: 45px 13px;
+  }
+  @include desktop {
+    max-width: calc(100% - 104px);
+    grid-template-columns: repeat(4, 194px);
+    grid-gap: 50px 56px;
+  }
+}
+.event-grid__item {
+  background-color: tomato;
+  list-style: none;
+  min-height: 228px;
+
+  @include tablet {
+    min-height: 312px;
+  }
+  @include desktop {
+    min-height: 312px;
+  }
+}
