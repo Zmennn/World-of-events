@@ -21,7 +21,7 @@ function venueSearch(key) {
         .then(response => response.json())
         .then(data => console.log(data._embedded.venues));
 }
-// venueSearch('Uk');
+venueSearch('Uk');
 
 
 
@@ -38,16 +38,20 @@ const eventProcessing = {
             this.dataRequest.keyword = text
         };
 
-        fetchObj.creatingRequest(this.dataRequest)
-            .then((c) => console.log(c))
 
+        fetchObj.creatingRequest(this.dataRequest)
+            .then(res => responseProcessing.avfun(res));
     }
 }
+
+async function avfun(res) { console.log(res); }
 
 // eventProcessing.standardRequest("US", "")
 
 
-
+const responseProcessing = {
+    async avfun(res) { console.log(res); }
+}
 
 
 
