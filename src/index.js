@@ -1,4 +1,7 @@
 import './sass/main.scss';
+
+import countrySearch from './js/countrySearch';
+
 import { fetchObj } from './fetch'
 
 
