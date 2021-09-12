@@ -90,7 +90,6 @@ form {
 .dropdown-country {
   position: relative;
   display: inline-block;
-  width: 240px;
 }
 
 .dropdown-content {
@@ -101,6 +100,8 @@ form {
   min-width: 230px;
   padding: 5px;
   border: 1px solid #ddd;
+  height: 200px;
+  overflow-y: scroll;
   z-index: 1;
 }
 
@@ -120,4 +121,9 @@ form {
   display: block;
   background-color: #939393;
   color: rgba(255, 255, 255, 0.3);
+}
+
+.name-list {
+  margin: 0;
+  padding: 0;
 }
