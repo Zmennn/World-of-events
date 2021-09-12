@@ -4,16 +4,21 @@
  */
 
 // Стили для файла с примером HTML-фрагмента
-
 @import './utilities/utility-classes';
 @import './utilities/mixin';
 @import './utilities/varaibles';
 
+
+
 @import './_input-style';
 
 
-@import './components/header';
 
+@import './components/header';
 @import './components/grid';
+
+@import'./components/header-bg';
+@import'./components/body-bg';
+
 
 
