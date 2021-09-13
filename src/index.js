@@ -1,15 +1,9 @@
 import './sass/main.scss';
-
+import { onErrorNotification } from './pnotify';
 import countrySearch from './js/countrySearch';
 import pagination from './js/pagination';
 
 import { fetchObj } from './fetch'
-
-
-
-//Импорт и вызов нотифашки, образец
-import { onErrorNotification } from './pnotify';
-onErrorNotification("test");
 
 
 
@@ -44,7 +38,7 @@ const responseProcessing = {
     cleanBan() { this.cleaningPermission = false },
 
     //обработчик инфы с сервера
-    async resHandler(res) {
+    resHandler(res) {
         console.log(res.data._embedded.venues);
         console.log(res);
         if (this.cleaningPermission) {
@@ -86,7 +80,8 @@ const eventProcessing = {
 
         //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
         fetchObj.creatingRequest(this.dataRequest)
-            .then(res => responseProcessing.resHandler(res));
+            .then(res => responseProcessing.resHandler(res))
+            .catch(err => onErrorNotification(err))
     },
 
     //метод запроса без очистки(пагинация)
@@ -103,7 +98,8 @@ const eventProcessing = {
 
         //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
         fetchObj.creatingRequest(this.dataRequest)
-            .then(res => responseProcessing.resHandler(res));
+            .then(res => responseProcessing.resHandler(res))
+            .catch(err => onErrorNotification(err))
     }
 };
 
