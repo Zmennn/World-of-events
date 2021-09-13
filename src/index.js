@@ -25,9 +25,14 @@ function venueSearch(key) {
 // venueSearch('Uk');
 
 
+
+
+//ниже руками не касаться !!! я его 2 дня уговаривал работать
+
 const responseProcessing = {
+
     //накопитель объектов отрисованной разметки 
-    allDataMarkup: {},
+    allDataMarkup: [],
 
     //ключ разрешения очистки
     cleaningPermission: false,
@@ -40,14 +45,23 @@ const responseProcessing = {
 
     //обработчик инфы с сервера
     async resHandler(res) {
+        console.log(res.data._embedded.venues);
         console.log(res);
-
         if (this.cleaningPermission) {
             //чистим аккум
-            this.allDataMarkup = {};
+            this.allDataMarkup = [];
 
-            console.log('засунем карточки в поле с очисткой поля');
+            //забиваем карточки в акум
+            this.allDataMarkup.push(...res.data._embedded.venues)
+
+            console.log(this.allDataMarkup, "акум");
+
+            console.log('засунем карточки в поле с очисткой поля', res.data._embedded.venues);
             console.log("всего страниц отправим в пагинашку", res.data.page.totalPages);
+        } else {
+            console.log('засунем карточки в поле без очисткой поля', res.data._embedded.venues);
+            this.allDataMarkup.push(...res.data._embedded.venues);
+            console.log(this.allDataMarkup, "акум2");
         }
     }
 }
@@ -60,9 +74,12 @@ const eventProcessing = {
 
     //метод запроса с очисткой
     standardRequest(data) {
+        console.log('start 1');
+
         //сохраним последний запрос
         this.dataRequest = {};
         this.dataRequest = data;
+        console.log(this.dataRequest, "объект первого запроса");
 
         //разрешим очистку разметки
         responseProcessing.cleanPermission()
@@ -74,6 +91,12 @@ const eventProcessing = {
 
     //метод запроса без очистки(пагинация)
     paginationRequest(data) {
+        console.log('start 2', data.target.dataset.num);
+
+        //добавим данные o номере страницы
+        this.dataRequest.page = data.target.dataset.num
+        console.log(this.dataRequest, "запрос канал пагинации");
+
 
         //запретим очистку разметки
         responseProcessing.cleanBan()
@@ -86,11 +109,11 @@ const eventProcessing = {
 
 
 
-eventProcessing.standardRequest("US", "");
-
-eventProcessing.paginationRequest(2)
+eventProcessing.standardRequest({ "countryCode": "US" });
 
 
-
+//Тестовая кнопка
+const btn = document.querySelector("#test-button")
+btn.addEventListener('click', eventProcessing.paginationRequest.bind(eventProcessing))
 
 
