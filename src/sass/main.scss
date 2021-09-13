@@ -9,11 +9,15 @@
 @import './utilities/mixin';
 @import './utilities/varaibles';
 
-@import './_input-style';
+@import './components/input-style';
 
 
 @import './components/header';
 
+<<<<<<< Updated upstream
 @import './components/grid';
 
 
+=======
+@import './components/footer';
+>>>>>>> Stashed changes

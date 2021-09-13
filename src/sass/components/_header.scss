@@ -1,9 +1,8 @@
-
 .header {
-   position: relative;
-   background-color: rgba(11, 11, 11, 0.5); 
-   
+  position: relative;
+  background-color: rgba(11, 11, 11, 0.5);
 }
+<<<<<<< Updated upstream
 .logo {   
     position: absolute;
     padding-top: 0px;
@@ -12,61 +11,92 @@
     //backdrop-filter: blur(30px);
     
 
+=======
+.logo {
+  position: absolute;
+  background-image: linear-gradient(
+    136.07deg,
+    rgba(196, 196, 196, 0.03) 10.75%,
+    rgba(196, 196, 196, 0) 92.33%
+  );
+  backdrop-filter: blur(30px);
+  border-bottom-right-radius: 250px;
+>>>>>>> Stashed changes
 }
 
 .icon-logo {
-    @include desktop {
+  @include desktop {
     width: 239px;
     height: 201px;
-}
-    @include tablet {
+  }
+  @include tablet {
     width: 180px;
     height: 151px;
-    }
+  }
 
-    @include mobile {
+  @include mobile {
     width: 106px;
+<<<<<<< Updated upstream
     height: 90px;   
     } 
+=======
+    height: 90px;
+  }
+
+  @include mini {
+    width: 106px;
+    height: 90px;
+  }
+>>>>>>> Stashed changes
 }
 
+.header__item {
+  text-align: center;
+  margin: 0 auto;
+  text-transform: uppercase;
+  font-family: var(--main-font);
+  color: var(--accent-color);
 
+  line-height: 1.22;
 
-.header__item{
-
-    text-align: center;
-    margin: 0 auto;
-    text-transform: uppercase;
-    font-family: var(--main-font);
-    color: var(--accent-color);
-    
-    line-height: 1.22;
-    
-    @include desktop {  
+  @include desktop {
     max-width: 600px;
-    padding-top: 40px; 
+    padding-top: 40px;
     padding-bottom: 52px;
-    }
+  }
 
-    @include tablet {
+  @include tablet {
     max-width: 353px;
-    padding-top: 40px; 
-    padding-bottom: 27px; 
-    }
+    padding-top: 40px;
+    padding-bottom: 27px;
+  }
 
-    @include mobile {
+  @include mobile {
     padding-top: 78px;
+<<<<<<< Updated upstream
     padding-bottom: 25px;   
     max-width: 212px; 
     }
+=======
+    padding-bottom: 25px;
+    max-width: 212px;
+  }
+
+  @include mini {
+    padding-top: 78px;
+    padding-bottom: 25px;
+    max-width: 212px;
+  }
+>>>>>>> Stashed changes
 }
 .header__title {
-    font-weight: 900;
+  font-weight: 900;
 
-    @include desktop {
-        font-size: 50px;
-        }
+  @include desktop {
+    font-size: 50px;
+  }
 
+<<<<<<< Updated upstream
     @include tablet {
         font-size: 30px;
     }
@@ -75,4 +105,17 @@
         font-size: 18px;   
     }
 }
+=======
+  @include tablet {
+    font-size: 30px;
+  }
 
+  @include mobile {
+    font-size: 18px;
+  }
+>>>>>>> Stashed changes
+
+  @include mini {
+    font-size: 18px;
+  }
+}
