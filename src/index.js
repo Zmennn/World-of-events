@@ -1,6 +1,7 @@
 import './sass/main.scss';
 
 import countrySearch from './js/countrySearch';
+import pagination from './js/pagination';
 
 import { fetchObj } from './fetch'
 
@@ -24,34 +25,72 @@ function venueSearch(key) {
 // venueSearch('Uk');
 
 
+const responseProcessing = {
+    //накопитель объектов отрисованной разметки 
+    allDataMarkup: {},
 
+    //ключ разрешения очистки
+    cleaningPermission: false,
 
-const eventProcessing = {
-    dataRequest: {},
+    //метод разрешения очистки
+    cleanPermission() { this.cleaningPermission = true },
 
-    standardRequest(country, text) {
-        this.dataRequest = {};
-        if (country !== "") {
-            this.dataRequest.countryCode = country
-        };
-        if (text !== "") {
-            this.dataRequest.keyword = text
-        };
+    //метод запрещения очистки
+    cleanBan() { this.cleaningPermission = false },
 
+    //обработчик инфы с сервера
+    async resHandler(res) {
+        console.log(res);
 
-        fetchObj.creatingRequest(this.dataRequest)
-            .then(res => responseProcessing.avfun(res));
+        if (this.cleaningPermission) {
+            //чистим аккум
+            this.allDataMarkup = {};
+
+            console.log('засунем карточки в поле с очисткой поля');
+            console.log("всего страниц отправим в пагинашку", res.data.page.totalPages);
+        }
     }
 }
 
-async function avfun(res) { console.log(res); }
-
-eventProcessing.standardRequest("US", "")
 
 
-const responseProcessing = {
-    async avfun(res) { console.log(res); }
-}
+const eventProcessing = {
+    //хранилище последнего запроса
+    dataRequest: {},
+
+    //метод запроса с очисткой
+    standardRequest(data) {
+        //сохраним последний запрос
+        this.dataRequest = {};
+        this.dataRequest = data;
+
+        //разрешим очистку разметки
+        responseProcessing.cleanPermission()
+
+        //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
+        fetchObj.creatingRequest(this.dataRequest)
+            .then(res => responseProcessing.resHandler(res));
+    },
+
+    //метод запроса без очистки(пагинация)
+    paginationRequest(data) {
+
+        //запретим очистку разметки
+        responseProcessing.cleanBan()
+
+        //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
+        fetchObj.creatingRequest(this.dataRequest)
+            .then(res => responseProcessing.resHandler(res));
+    }
+};
+
+
+
+eventProcessing.standardRequest("US", "");
+
+eventProcessing.paginationRequest(2)
+
+
 
 
 
