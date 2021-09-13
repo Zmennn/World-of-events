@@ -21,7 +21,7 @@ function venueSearch(key) {
         .then(response => response.json())
         .then(data => console.log(data._embedded.venues));
 }
-venueSearch('Uk');
+// venueSearch('Uk');
 
 
 
@@ -46,7 +46,7 @@ const eventProcessing = {
 
 async function avfun(res) { console.log(res); }
 
-// eventProcessing.standardRequest("US", "")
+eventProcessing.standardRequest("US", "")
 
 
 const responseProcessing = {
