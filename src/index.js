@@ -1,6 +1,7 @@
 import './sass/main.scss';
 
 import countrySearch from './js/countrySearch';
+import pagination from './js/pagination';
 
 import { fetchObj } from './fetch'
 
