@@ -2,9 +2,12 @@ body {
   position: relative;
 }
 .body-bg {
+
+
   z-index: -5;
 }
 .body-bg {
+
   @include mobile {
     background-image: url(../images/mobile/bg-body-mobile.svg);
     background-repeat: no-repeat;
@@ -13,6 +16,10 @@ body {
     height: 100%;
     position: absolute;
     top: 364px;
+
+    z-index: -1;
+
+
     @include retina2 {
       background-image: url(../images/mobile/bg-body-mobile.svg);
       background-repeat: no-repeat;
@@ -21,6 +28,10 @@ body {
       height: 100%;
       position: absolute;
       top: 364px;
+
+      z-index: -1;
+
+
     }
   }
   @include tablet {
@@ -31,6 +42,10 @@ body {
     height: 100%;
     position: absolute;
     top: 364px;
+
+    z-index: -1;
+
+
     @include retina2 {
       background-image: url(../images/tablet/bg-body-tablet.svg);
       background-repeat: no-repeat;
@@ -39,6 +54,10 @@ body {
       height: 100%;
       position: absolute;
       top: 364px;
+
+      z-index: -1;
+
+
     }
   }
   @include desktop {
@@ -49,6 +68,9 @@ body {
     height: 100%;
     position: absolute;
     top: 446px;
+
+    z-index: -1;
+
     @include retina2 {
       background-image: url(../images/desktop/bg-body-desktop.svg);
       background-repeat: no-repeat;
@@ -57,6 +79,9 @@ body {
       height: 100%;
       position: absolute;
       top: 446px;
+
+      z-index: -1;
+
     }
   }
 }
