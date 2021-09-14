@@ -4,14 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Заголовок страницы</title>
+
     <link
-
-
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap"
       rel="stylesheet"
     />
     <link
-
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
       integrity="sha512-ISS7cAi1PEhQ8jnbJpJZMd29NlhNj4AWYyLOSp2CE/CsHxTCu+r+t0D2yoJudVrd0/8fTVPUVDzY5Tvli75u/g=="
@@ -20,26 +18,29 @@
   </head>
 
   <body>
-    <!-- Так добавляются фрагменты в главные HTML-файлы страниц. -->
+    <include src="./partials/main.html"></include>
 
-    <include src="./partials/example-pavel.html"></include>
-    <!-- <include src="./partials/example.html"></include> -->
-    <include src="./partials/test-zmennn.html"></include>
-    <include src="./partials/test-Vitalina.html"></include>
-    <include src="./partials/test-Nazar.html"></include>
+    <include src="./partials/header.html"></include>
 
-    <include src="./partials/test-Rita.html"></include>
-    <include src="./partials/test-Lena.html"></include>
-    <include src="./partials/test-Den9I.html"></include>
-    <include src="./partials/test-kostia.html"></include>
-    <include src="./partials/test-svyat.html"></include>
-
+    <include src="./partials/input-markup.html"></include>
 
     <include src="./partials/grid.html"></include>
+
     <include src="./partials/modal-window.html"></include>
 
   
     <!-- Скрипт идёт последним в разметке. В нём уже подключен главный SASS-файл. -->
+
+    <include src="./partials/pagination.html"></include>
+
+    <include src="./partials/footer.html"></include>
+
+    <!-- отладочная кнопка -->
+    <button type="button" id="test-button" data-num="3">
+      тестовая для отладки логики
+    </button>
+
+
     <script src="./index.js"></script>
   </body>
 </html>
