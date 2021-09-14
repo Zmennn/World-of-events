@@ -2,7 +2,11 @@ import './sass/main.scss';
 import { onErrorNotification } from './pnotify';
 import countrySearch from './js/countrySearch';
 import pagination from './js/pagination';
+
+import location from './js/loadByLocation';
+
 import eventsGrid from './templates/events-grid.hbs';
+
 
 import { fetchObj } from './fetch';
 
