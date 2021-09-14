@@ -1,16 +1,17 @@
 import getRefs from './get-refs';
 import countryCodes from '../country-codes.json';
 const refs = getRefs();
-
 const newArray = [];
-
 refs.linkDropdownBtn.addEventListener('click', showCountryDropdownForm);
 refs.linkDropdownInput.addEventListener('input', filterCountryDropdownList);
+refs.linkDropdownIcon.addEventListener('click', showCountryDropdownForm);
+
 function showCountryDropdownForm(e) {
   document.getElementById('myDropdown').classList.toggle('show');
   refs.linkDropdownList.innerHTML = showCountryList(countryCodes);
+  refs.linkDropdownBtn.textContent = 'Choose country';
+  document.getElementById('myInput').value = '';
 }
-
 function showCountryList(countryCodesArray) {
   return countryCodesArray
     .map(item => {
@@ -22,7 +23,6 @@ function showCountryList(countryCodesArray) {
     })
     .join('');
 }
-
 function showCountryName(array) {
   return array
     .map(elem => {
@@ -34,7 +34,6 @@ function showCountryName(array) {
     })
     .join('');
 }
-
 function filterCountryDropdownList(e) {
   let input, filter, a, i, list;
   input = refs.linkDropdownInput;
@@ -51,16 +50,27 @@ function filterCountryDropdownList(e) {
     }
   }
 }
-
 refs.linkDropdownList.addEventListener('click', showCountryEventInfo);
 
+// Возвращается Сountry Code - element.code//
 function showCountryEventInfo(e) {
   refs.linkDropdownBtn.textContent = e.target.textContent;
-  refs.linkDropdownContent.innerHTML = '';
   countryCodes.forEach(element => {
     if (element.name === e.target.textContent) {
-      eventSearch(element.code);
-      document.getElementById('myDropdown').classList.toggle('show');
+      refs.linkDropdownContent.classList.remove('show');
+      console.log(element.code);
     }
   });
+}
+const headerZone = document.querySelector('.header__item');
+const headerZoneRight = document.querySelector('.container');
+headerZone.addEventListener('click', onBackdropClose);
+headerZoneRight.addEventListener('click', onBackdropClose);
+document.body.addEventListener('click', onBackdropClose);
+function onBackdropClose(e) {
+  if (e.currentTarget === e.target) {
+    refs.linkDropdownContent.classList.remove('show');
+    refs.linkDropdownBtn.textContent = 'Choose country';
+    document.getElementById('myInput').value = '';
+  }
 }

@@ -34,7 +34,7 @@ form {
 /* поиск в выпадающем списке*/
 input[id='myInput'] {
   padding-left: 10px;
-  background-color: var(--input-bgr-color);
+  background-color: rgb(75, 73, 73);
   width: 210px;
   height: 30px;
   color: hsl(0, 4%, 70%);
@@ -72,7 +72,7 @@ input[id='myInput']::placeholder {
   border: none;
   cursor: pointer;
   background: var(--input-bgr-color);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   border-radius: 20px;
   padding-left: 30px;
   font-family: var(--main-font);
