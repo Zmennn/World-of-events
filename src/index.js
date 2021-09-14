@@ -2,13 +2,23 @@ import './sass/main.scss';
 import { onErrorNotification } from './pnotify';
 import countrySearch from './js/country-search';
 import pagination from './js/pagination';
-
-import location from './js/loadByLocation';
-
 import eventsGrid from './templates/events-grid.hbs';
-
-
 import { fetchObj } from './fetch';
+import { userCountry } from './js/loadByLocation'
+
+
+
+// userCountry().then((response) => {
+//   const data = response.data;
+//   const country = data.country_code;
+//   const firstRequest = { countryCode: country };
+//   eventProcessing.standardRequest(firstRequest);
+// })
+//   .catch(err => {
+//     const firstRequest = { countryCode: "US" };
+//   });
+
+
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
@@ -46,20 +56,20 @@ const responseProcessing = {
 
   //обработчик инфы с сервера
   resHandler(res) {
-    console.log(res.data._embedded.venues);
+    console.log(res.data._embedded.events);
     console.log(res);
     if (this.cleaningPermission) {
       //чистим аккум
       this.allDataMarkup = [];
 
       //забиваем карточки в акум
-      this.allDataMarkup.push(...res.data._embedded.venues);
+      this.allDataMarkup.push(...res.data._embedded.events);
 
       console.log(this.allDataMarkup, 'акум');
 
       console.log(
         'засунем карточки в поле с очисткой поля',
-        res.data._embedded.venues,
+        res.data._embedded.events,
       );
       console.log(
         'всего страниц отправим в пагинашку',
@@ -68,9 +78,9 @@ const responseProcessing = {
     } else {
       console.log(
         'засунем карточки в поле без очисткой поля',
-        res.data._embedded.venues,
+        res.data._embedded.events,
       );
-      this.allDataMarkup.push(...res.data._embedded.venues);
+      this.allDataMarkup.push(...res.data._embedded.events);
       console.log(this.allDataMarkup, 'акум2');
     }
   },
@@ -118,7 +128,7 @@ const eventProcessing = {
   },
 };
 
-eventProcessing.standardRequest({ countryCode: 'US' });
+// eventProcessing.standardRequest({ countryCode: 'US' });
 
 //Тестовая кнопка
 const btn = document.querySelector('#test-button');
