@@ -2,6 +2,7 @@ import './sass/main.scss';
 import { onErrorNotification } from './pnotify';
 import countrySearch from './js/countrySearch';
 import pagination from './js/pagination';
+import location from './js/loadByLocation';
 
 import { fetchObj } from './fetch'
 
