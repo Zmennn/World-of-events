@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const fetchObj = {
 
-    BASE_URL: "https://app.ticketmaster.com/discovery/v2/venues.json",
+    BASE_URL: "https://app.ticketmaster.com/discovery/v2/events.json",
 
     creatingRequest(dataObj) {
 
