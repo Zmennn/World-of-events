@@ -1,15 +1,14 @@
-
-.header {
-   position: relative;
-   background-color: rgba(11, 11, 11, 0.5); 
-   
+.header__container {
+  position: relative; 
 }
+
 .logo {   
     position: absolute;
+    top: 0;
+    left: 0;
     background-image: linear-gradient(136.07deg, rgba(196, 196, 196, 0.03) 10.75%, rgba(196, 196, 196, 0) 92.33%);
     backdrop-filter: blur(30px);
     border-bottom-right-radius: 250px;
-
 }
 
 .icon-logo {
@@ -36,13 +35,11 @@
 
 
 .header__item{
-
     text-align: center;
     margin: 0 auto;
     text-transform: uppercase;
     font-family: var(--main-font);
     color: var(--accent-color);
-    
     line-height: 1.22;
     
     @include desktop {  
@@ -69,6 +66,7 @@
     max-width: 212px;   
     }
 }
+
 .header__title {
     font-weight: 900;
 
@@ -89,3 +87,6 @@
     }
 }
 
+.animate__animated.animate__fadeInDown {
+    --animate-duration: 2s;
+  }
