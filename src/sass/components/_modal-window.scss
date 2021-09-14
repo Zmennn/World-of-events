@@ -1,17 +1,16 @@
 // Общие стили
-
 .modal-content {
     display: flex;
 }
 
 .modal-container {
     margin: auto;
-    background: --modal-background-color;
+    background: var(--modal-background-color);
     border-radius: 300px 0px;
 }
 
 .modal-item-name {
-    color: --accent-color;
+    color: var(--accent-color);
     list-style-type: none;
     font-weight: 600;
     font-size: 24px;
@@ -23,10 +22,9 @@
 }
 
 /////Кнопки и псевдо/////
-
 .btn-buy {
-    background-color: --modal-button-background;
-    color: --sub-title-color;
+    background-color: var(--modal-button-background);
+    color: var(--sub-title-color);
     border-radius: 5px;
     height: 40px;
     width: 145px;
@@ -38,13 +36,13 @@
 .btn-more-from {
     border-radius: 5px;
     border: 1px;
-    border-color: --modal-button-background;
-    color: --modal-button-background;
+    border-color: var(--modal-button-background);
+    color: var(--modal-button-background);
 }
 
 .btn-close {
     background: transparent;
-    outline: none; 
+    outline: none;
     border: 0;
     cursor: pointer;
 }
@@ -54,272 +52,213 @@
 }
 
 ///// ******** Исправить кнопку закрытия /////
-
-        // .btn-close {
-        //     position: absolute;
-        //     right: 25px;
-        //     top: 25px;
-        // }
-
+// .btn-close {
+//     position: absolute;
+//     right: 25px;
+//     top: 25px;
+// }
 //////////// Десктоп 1280+ ////////////
-
-    @media screen and (min-width: 1280px) {
-        .modal-container{
-            height: 1023px;
-            width: 930px;
-            padding: 30px 30px 62px 30px;
-         }
-
-         .round-picture img {
-            margin: 32px, auto, 41px, auto;
-            width: 132px;
-            height: 132px;
-        }
-
-        .modal-image img {
-            max-width: 360px;
-            max-height: 641px;
-        }
-
-        .modal-main-info {
-            max-width: 450px;
-            margin-left: 60px;
-        }
-        
-        .modal-item-name {
-            line-height: 29px;
-        }
-        
-        
-        .modal-item-name:not(:last-child) {
-            margin-bottom: 20px;
-        }
-
-        .modal-item-text {
-            font-size: 18px;
-            line-height: 22px;
-            margin-top: 7px;
-        }
-
-        .price {
-            font-size: 18px;
-            line-height: 22px;
-            margin-top: 7px;
-            margin-bottom: 20px;
-        }
-
-        .btn-buy {
-            height: 40px;
-            width: 145px;
-            font-weight: 500;
-            font-size: 16px;
-            line-height: 20px;
-            margin-bottom: 24px;
-            }
-
-        
-        .btn-more-from {
-            width: 255px;
-            height: 40px;
-            font-size: 16px;
-            line-height: 20px;
-            width: 255px;
-            height: 40px;
-            margin: 21px, auto, 32px, auto;
-        }
-
-      }
-
+@media screen and (min-width: 1280px) {
+    .modal-container {
+        height: 1023px;
+        width: 930px;
+        padding: 30px 30px 62px 30px;
+    }
+    .round-picture img {
+        margin: 32px, auto, 41px, auto;
+        width: 132px;
+        height: 132px;
+    }
+    .modal-image img {
+        max-width: 360px;
+        max-height: 641px;
+    }
+    .modal-main-info {
+        max-width: 450px;
+        margin-left: 60px;
+    }
+    .modal-item-name {
+        line-height: 29px;
+    }
+    .modal-item-name:not(:last-child) {
+        margin-bottom: 20px;
+    }
+    .modal-item-text {
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 7px;
+    }
+    .price {
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 7px;
+        margin-bottom: 20px;
+    }
+    .btn-buy {
+        height: 40px;
+        width: 145px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 24px;
+    }
+    .btn-more-from {
+        width: 255px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 20px;
+        width: 255px;
+        height: 40px;
+        margin: 21px, auto, 32px, auto;
+    }
+}
 
 //////////// Таблет 768-1279 ////////////
-
-    @media screen and (min-width: 768px) and (max-width: 1279.98px) {
-        .modal-container{
-            height: 831px;
-            width: 595px;
-         }
-
-         .round-picture img {
-            margin: 28px, auto, 43px, auto;
-            width: 70px;
-            height: 70px;
-        } 
-
-        .modal-image img {
-            max-width: 233px;
-            max-height: 416px;
-        }
-
-        .modal-main-info {
-            max-width: 265px;
-            margin-left: 30px;
-        }
-        
-        .modal-item-name {
-            line-height: 24px;
-        }
-        
-        
-        .modal-item-name:not(:last-child) {
-            margin-bottom: 10px;
-        }
-
-        .modal-item-text {
-            font-size: 16px;
-            line-height: 20px;
-            margin-top: 5px;
-        }
-
-        .price {
-            font-size: 16px;
-            line-height: 20px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
-
-        .btn-more-from {
-            width: 255px;
-            height: 40px;
-            font-size: 16px;
-            line-height: 20px;
-            width: 255px;
-            height: 40px;
-            margin: 20px, auto, 56px, auto;
-        }
-
+@media screen and (min-width: 768px) and (max-width: 1279.98px) {
+    .modal-container {
+        height: 831px;
+        width: 595px;
     }
- 
+    .round-picture img {
+        margin: 28px, auto, 43px, auto;
+        width: 70px;
+        height: 70px;
+    }
+    .modal-image img {
+        max-width: 233px;
+        max-height: 416px;
+    }
+    .modal-main-info {
+        max-width: 265px;
+        margin-left: 30px;
+    }
+    .modal-item-name {
+        line-height: 24px;
+    }
+    .modal-item-name:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    .modal-item-text {
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 5px;
+    }
+    .price {
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .btn-more-from {
+        width: 255px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 20px;
+        width: 255px;
+        height: 40px;
+        margin: 20px, auto, 56px, auto;
+    }
+}
+
 //////////// Мобилка 320-363.98 ////////////
-
 @media screen and (max-width: 363.98px) and (min-width: 320px) {
-        .modal-container{
-            height: 915px;
-            width: 272px;
-            border-radius: 150px 0px;
-         }
-
-         .round-picture img {
-            margin: 72px, auto, 18px, auto;
-            width: 102px;
-            height: 102px;
-        } 
-
-        .modal-image img {
-            display: none;
-        }
-
-        .modal-main-info {
-            max-width: 243px;
-        }
-        
-        .modal-item-name {
-            line-height: 24px;
-            text-align: center;
-        }
-        
-        
-        .modal-item-name:not(:last-child) {
-            margin-bottom: 10px;
-        }
-
-        .modal-item-text {
-            font-size: 16px;
-            line-height: 20px;
-            margin-top: 5px;
-        }
-
-        .price {
-            font-size: 16px;
-            line-height: 20px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-        }
-
-        .btn-buy {
-           margin-bottom: 15px;
-        }
-
-        .btn-more-from {
-            width: 255px;
-            height: 40px;
-            font-size: 16px;
-            line-height: 20px;
-            width: 255px;
-            height: 40px;
-            margin: 10px, auto, 104px, auto;
-        }
-
+    .modal-container {
+        height: 915px;
+        width: 272px;
+        border-radius: 150px 0px;
     }
-  
-
-
+    .round-picture img {
+        margin: 72px, auto, 18px, auto;
+        width: 102px;
+        height: 102px;
+    }
+    .modal-image img {
+        display: none;
+    }
+    .modal-main-info {
+        max-width: 243px;
+    }
+    .modal-item-name {
+        line-height: 24px;
+        text-align: center;
+    }
+    .modal-item-name:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    .modal-item-text {
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 5px;
+    }
+    .price {
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .btn-buy {
+        margin-bottom: 15px;
+    }
+    .btn-more-from {
+        width: 255px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 20px;
+        width: 255px;
+        height: 40px;
+        margin: 10px, auto, 104px, auto;
+    }
+}
 
 // .modal-main-info {
 //     max-width: 450px;
 //     margin-left: 60px;
 // }
-
 // .modal-main-info {
 //     max-width: 450px;
 //     margin-left: 60px;
 // }
-
-
 // .modal-item-name {
 //     font-weight: 600;
 //     font-size: 24px;
 //     line-height: 29px;
 // }
-
 // .modal-item-name {
 //     font-weight: 600;
 //     font-size: 24px;
 //     line-height: 29px;
 // }
-
 // .modal-item-name:not(:last-child) {
 //     margin-bottom: 20px;
 // }
-
 // .modal-item-name:not(:last-child) {
 //     margin-bottom: 20px;
 // }
-
-
 // .modal-item-text {
 //     font-size: 18px;
 //     line-height: 22px;
 //     margin-top: 7px;
 // }
-
 // .modal-item-text {
 //     font-size: 18px;
 //     line-height: 22px;
 //     margin-top: 7px;
 // }
-
-
-
 // .price {
 //     font-size: 18px;
 //     line-height: 22px;
 //     margin-top: 7px;
 //     margin-bottom: 20px;
 // }
-
 // .price {
 //     font-size: 18px;
 //     line-height: 22px;
 //     margin-top: 7px;
 //     margin-bottom: 20px;
 // }
-
 // .price::after {
 //     content: url('data:image/svg+xml; base64, id="icon-close" viewBox="0 0 32 32"><path fill="#4c00fe" style="fill:var(--color3, #4c00fe)" d="M1.646 32a1.646 1.646 0 0 1-1.163-2.811L29.19.482a1.646 1.646 0 1 1 2.328 2.329L2.811 31.517A1.65 1.65 0 0 1 1.646 32z"/><path fill="#4c00fe" style="fill:var(--color3, #4c00fe)" d="M30.355 32a1.63 1.63 0 0 1-1.163-.483L.483 2.811A1.647 1.647 0 0 1 2.812.482l28.707 28.707A1.646 1.646 0 0 1 30.356 32z"/>');
 // }
-
-
-
 //     .btn-buy {
 //         height: 40px;
 //         width: 145px;
@@ -328,7 +267,6 @@
 //         font-size: 16px;
 //         line-height: 20px;
 //         }
-
 //         .btn-buy {
 //             height: 40px;
 //             width: 145px;
@@ -337,10 +275,6 @@
 //             font-size: 16px;
 //             line-height: 20px;
 //             }
-        
-
-
-
 // .btn-more-from {
 //     width: 255px;
 //     height: 40px;
@@ -350,7 +284,6 @@
 //     height: 40px;
 //     margin: 45px, auto, 32px, auto;
 // }
-
 // .btn-more-from {
 //     width: 255px;
 //     height: 40px;
@@ -360,16 +293,12 @@
 //     height: 40px;
 //     margin: 45px, auto, 32px, auto;
 // }
-
-
 //  .modal-content {
 //      display: flex;
 //      justify-content: space-between;
 //      align-items: baseline;
 //  }
-
 // .price::before {
 //   content: url('data:images<symbol id="icon-ticket" viewBox="0 0 44 32"><path d="M4.91 1.27H0v29.46h4.91V1.27zM17.26 1.27h-4.91v29.46h4.91V1.27zM24.699 1.27h-4.91v29.46h4.91V1.27zM44.19 1.27h-7.291v29.46h7.291V1.27zM9.82 1.27H7.439v29.46H9.82V1.27zM29.46 1.27h-2.381v29.46h2.381V1.27zM34.37 1.27h-2.381v29.46h2.381V1.27z"/></symbol></defs></svg>');  
 // }
-
 // (.../images/sprite.svg#icon-ticket);
