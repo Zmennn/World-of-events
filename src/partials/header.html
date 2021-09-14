@@ -1,15 +1,42 @@
 <div class="container header__container">
- <div class="header-bg "></div>
-<header class="header">
-  <div class="logo">
-    <svg class="icon-logo">
-      <use href="images/sprite.svg#icon-logo"></use>
-    </svg>
-  </div>
+  <div class="header-bg"></div>
+  <header class="header">
+    <div class="logo">
+      <svg class="icon-logo">
+        <use href="images/sprite.svg#icon-logo"></use>
+      </svg>
+    </div>
 
-  <div class="header__item">
-    <h1 class="header__title animate__animated animate__fadeInDown">Find best events around the world</h1>
-  </div>
-</header> 
+    <div class="header__item">
+      <h1 class="header__title animate__animated animate__fadeInDown">
+        Find best events around the world
+      </h1>
+    </div>
+    <div class="container">
+      <div class="input-event">
+        <form class="search-event">
+          <input
+            type="text"
+            class="search-input-event"
+            placeholder="Start searching"
+          />
+          <svg class="search-button__icon" width="12" height="12">
+            <use href="././images/input-icons.svg#icon-search"></use>
+          </svg>
+        </form>
+      </div>
+      <div class="dropdown-country">
+        <button class="drop-btn">Choose country</button>
+
+        <svg class="drop-button__icon" width="15" height="10">
+          <use href="././images/input-icons.svg#icon-polygon"></use>
+        </svg>
+
+        <div id="myDropdown" class="dropdown-content">
+          <input type="text" placeholder="Search.." id="myInput" />
+          <div class="dropdown-list"></div>
+        </div>
+      </div>
+    </div>
+  </header>
 </div>
-

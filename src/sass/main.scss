@@ -8,8 +8,7 @@
 @import './utilities/mixin';
 @import './utilities/varaibles';
 
-@import './_input-style';
-
+@import './components/input-style';
 @import './components/header';
 @import './components/event-card';
 @import './components/grid';
@@ -22,6 +21,3 @@
 @import './components/body-bg';
 
 @import './components/footer';
-
-
-
