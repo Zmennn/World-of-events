@@ -1,98 +1,174 @@
 .header-bg {
-    z-index: -5;
+  z-index: -5;
+  transform: translate(-50%, 0%);
+  left: 50%;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: center;
 }
 
 .header-bg {
-    @include mobile {
-        background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/mobile/mobile-intro.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 364px;
-        width: 100%;
-        position: absolute;
-        @include retina2 {
-            background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/mobile/mobile-intro@2x.jpg);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            height: 364px;
-            width: 100%;
-            position: absolute;
-        }
+  @include mini {
+    background-image: linear-gradient(
+        180deg,
+        rgba(13, 13, 13, 0.19) 0%,
+        rgba(14, 14, 14, 0.8) 100%
+      ),
+      url(../images/mobile/mobile-intro.jpg);
+
+    // ../images/mobile/mobile-intro.jpg
+
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    height: 364px;
+    width: 100%;
+    // position: absolute;
+    @include retina2 {
+      background-image: linear-gradient(
+          180deg,
+          rgba(13, 13, 13, 0.19) 0%,
+          rgba(14, 14, 14, 0.8) 100%
+        ),
+        url(../images/mobile/mobile-intro@2x.jpg);
+
+      // ../images/mobile/mobile-intro@2x.jpg
+
+      //   background-repeat: no-repeat;
+      //   background-size: 100% 100%;
+      //   height: 364px;
+      //   width: 100%;
+      //   position: absolute;
     }
-    @include tablet {
-        background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/tablet/tablet-intro.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 364px;
-        width: 100%;
-        position: absolute;
-        @include retina2 {
-            background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/tablet/tablet-intro@2x.jpg);
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            height: 364px;
-            width: 100%;
-            position: absolute;
-        }
+  }
+
+  @include mobile {
+    background-image: linear-gradient(
+        180deg,
+        rgba(13, 13, 13, 0.19) 0%,
+        rgba(14, 14, 14, 0.8) 100%
+      ),
+      url(../images/tablet/tablet-intro.jpg);
+
+    // ../images/mobile/mobile-intro.jpg
+
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    height: 364px;
+    width: 100%;
+    // position: absolute;
+    @include retina2 {
+      background-image: linear-gradient(
+          180deg,
+          rgba(13, 13, 13, 0.19) 0%,
+          rgba(14, 14, 14, 0.8) 100%
+        ),
+        url(../images/tablet/tablet-intro@2x.jpg);
+
+      // ../images/mobile/mobile-intro@2x.jpg
+
+      //   background-repeat: no-repeat;
+      //   background-size: 100% 100%;
+      //   height: 364px;
+      //   width: 100%;
+      //   position: absolute;
     }
-    @include desktop {
-        background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 446px;
-        width: 1280px;
-        position: absolute;
-        @include retina2 {
-            background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 446px;
-            width: 1280px;
-            position: absolute;
-        }
+  }
+
+  @include tablet {
+    background-image: linear-gradient(
+        180deg,
+        rgba(13, 13, 13, 0.19) 0%,
+        rgba(14, 14, 14, 0.8) 100%
+      ),
+      url(../images/tablet/tablet-intro.jpg);
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    height: 364px;
+    width: 768px;
+    // position: absolute;
+    @include retina2 {
+      background-image: linear-gradient(
+          180deg,
+          rgba(13, 13, 13, 0.19) 0%,
+          rgba(14, 14, 14, 0.8) 100%
+        ),
+        url(../images/tablet/tablet-intro@2x.jpg);
+      // background-repeat: no-repeat;
+      // background-size: 100% 100%;
+      // height: 364px;
+      // width: 100%;
+      //   position: absolute;
     }
-    @media screen and (min-width: 1281px) and (max-width:1440px) {
-        background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 446px;
-        width: 1280px;
-        position: absolute;
-        transform: translate(-4%, 0%);
-        top: 0;
-        right: 0;
-        @include retina2 {
-            background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 446px;
-            width: 1280px;
-            position: absolute;
-            transform: translate(-4%, 0%);
-            top: 0;
-            right: 0;
-        }
+  }
+
+  @include desktop {
+    background-image: linear-gradient(
+        180deg,
+        rgba(13, 13, 13, 0.19) 0%,
+        rgba(14, 14, 14, 0.8) 100%
+      ),
+      url(../images/desktop/desktop-into.jpg);
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    height: 446px;
+    width: 1280px;
+    // position: absolute;
+    @include retina2 {
+      background-image: linear-gradient(
+          180deg,
+          rgba(13, 13, 13, 0.19) 0%,
+          rgba(14, 14, 14, 0.8) 100%
+        ),
+        url(../images/desktop/desktop-into@2x.jpg);
+      // background-repeat: no-repeat;
+      // background-size: cover;
+      // height: 446px;
+      // width: 1280px;
+      // position: absolute;
     }
-    @media screen and (min-width: 1441px) and(max-width: 2560px) {
-        background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 446px;
-        width: 1280px;
-        position: absolute;
-        transform: translate(-50%, 0%);
-        top: 0;
-        right: 0;
-        @include retina2 {
-            background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
-            background-repeat: no-repeat;
-            background-size: cover;
-            height: 446px;
-            width: 1280px;
-            position: absolute;
-            transform: translate(-50%, 0%);
-            top: 0;
-            right: 0;
-        }
-    }
+  }
+  // @media screen and (min-width: 1281px) and (max-width:1440px) {
+  //     background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
+  //     background-repeat: no-repeat;
+  //     background-size: cover;
+  //     height: 446px;
+  //     width: 1280px;
+  //     position: absolute;
+  //     transform: translate(-4%, 0%);
+  //     top: 0;
+  //     right: 0;
+  //     @include retina2 {
+  //         background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
+  //         background-repeat: no-repeat;
+  //         background-size: cover;
+  //         height: 446px;
+  //         width: 1280px;
+  //         position: absolute;
+  //         transform: translate(-4%, 0%);
+  //         top: 0;
+  //         right: 0;
+  //     }
+  // }
+  // @media screen and (min-width: 1441px) and(max-width: 2560px) {
+  //     background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
+  //     background-repeat: no-repeat;
+  //     background-size: cover;
+  //     height: 446px;
+  //     width: 1280px;
+  //     position: absolute;
+  //     transform: translate(-50%, 0%);
+  //     top: 0;
+  //     right: 0;
+  //     @include retina2 {
+  //         background-image: linear-gradient( 180deg, rgba(13, 13, 13, 0.19) 0%, rgba(14, 14, 14, 0.8) 100%), url(../images/desktop/desktop-into@2x.jpg);
+  //         background-repeat: no-repeat;
+  //         background-size: cover;
+  //         height: 446px;
+  //         width: 1280px;
+  //         position: absolute;
+  //         transform: translate(-50%, 0%);
+  //         top: 0;
+  //         right: 0;
+  //     }
+  // }
 }
