@@ -8,5 +8,7 @@ export default function getRefs() {
     linkDropdownList: document.querySelector('.dropdown-list'),
     linkDropdownInput: document.querySelector('#myInput'),
     linkDropdownIcon: document.querySelector('.drop-button__icon'),
+
+    eventGrid: document.querySelector('.event-grid'),
   };
 }

@@ -5,16 +5,54 @@ import pagination from './js/pagination';
 import eventsGrid from './templates/events-grid.hbs';
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
+import getRefs from './js/get-refs';
 
-// userCountry().then((response) => {
-//   const data = response.data;
-//   const country = data.country_code;
-//   const firstRequest = { countryCode: country };
-//   eventProcessing.standardRequest(firstRequest);
-// })
-//   .catch(err => {
-//     const firstRequest = { countryCode: "US" };
-//   });
+
+const refs = getRefs()
+
+userCountry().then((response) => {
+  const data = response.data;
+  const country = data.country_code;
+  const firstRequest = { countryCode: "CA" };
+
+  fetchObj
+    .creatingRequest(firstRequest)
+    .then(res => {
+
+      if (res.data.page.totalElements < 1) {
+        fetchObj.creatingRequest({ countryCode: "US" })
+          .then(res => {
+            console.log(res.data._embedded.events);
+
+            refs.eventGrid
+              .insertAdjacentHTML('beforeend', eventsGrid(res.data._embedded.events));
+
+            responseProcessing.allDataMarkup.push(...res.data._embedded.events);
+
+            console.log(
+              'всего страниц отправим в пагинашку',
+              res.data.page.totalPages,
+            )
+          })
+      } else {
+        refs.eventGrid
+          .insertAdjacentHTML('beforeend', eventsGrid(res.data._embedded.events));
+
+        responseProcessing.allDataMarkup.push(...res.data._embedded.events);
+
+        console.log(
+          'всего страниц отправим в пагинашку',
+          res.data.page.totalPages,
+        );
+      };
+
+
+    })
+    .catch(err => onErrorNotification(err));
+})
+
+
+
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
@@ -27,13 +65,16 @@ export function venueSearch(key) {
   )
     .then(response => response.json())
     .then(data => {
-      console.log('data fetch card', data);
+      console.log('data fetch card', data._embedded.events);
       document
         .querySelector('.event-grid')
         .insertAdjacentHTML('beforeend', eventsGrid(data._embedded.events));
     });
 }
-venueSearch('CA');
+// venueSearch('CA');
+
+
+
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
@@ -86,7 +127,9 @@ const responseProcessing = {
   },
 };
 
+//Обрабатываем события интерфейса
 const eventProcessing = {
+
   //хранилище последнего запроса
   dataRequest: {},
 
