@@ -10,53 +10,6 @@ import getRefs from './js/get-refs';
 
 const refs = getRefs()
 
-userCountry().then((response) => {
-  const data = response.data;
-  const country = data.country_code;
-  const firstRequest = { countryCode: country };
-
-  fetchObj
-    .creatingRequest(firstRequest)
-    .then(res => {
-
-      if (res.data.page.totalElements < 1) {
-        fetchObj.creatingRequest({ keyword: "song", countryCode: "US" }) //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
-          .then(res => {
-            console.log("ответ сервера", res);
-
-            refs.eventGrid
-              .insertAdjacentHTML('beforeend', eventsGrid(res.data._embedded.events));
-
-            responseProcessing.allDataMarkup.push(...res.data._embedded.events);
-
-            console.log(
-              'всего страниц отправим в пагинашку',
-              res.data.page.totalPages,
-            );
-
-            console.log("аккум", responseProcessing.allDataMarkup);
-
-            console.log("oбъект для работы модалкой", res.data._embedded.events[11]);
-          })
-      } else {
-        refs.eventGrid
-          .insertAdjacentHTML('beforeend', eventsGrid(res.data._embedded.events));
-
-        responseProcessing.allDataMarkup.push(...res.data._embedded.events);
-
-        console.log(
-          'всего страниц отправим в пагинашку',
-          res.data.page.totalPages,
-        );
-      };
-
-
-    })
-    .catch(err => onErrorNotification(err));
-})
-
-
-
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
@@ -82,12 +35,14 @@ export function venueSearch(key) {
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
+let i = 0;
+
 const responseProcessing = {
   //накопитель объектов отрисованной разметки
   allDataMarkup: [],
 
   //ключ разрешения очистки
-  cleaningPermission: false,
+  cleaningPermission: true,
 
   //метод разрешения очистки
   cleanPermission() {
@@ -95,9 +50,9 @@ const responseProcessing = {
   },
 
   //метод запрещения очистки
-  cleanBan() {
-    this.cleaningPermission = false;
-  },
+  // cleanBan() {
+  // this.cleaningPermission = false;
+  // },
 
   //обработчик инфы с сервера
   resHandler(res) {
@@ -105,10 +60,10 @@ const responseProcessing = {
     console.log(res);
     if (this.cleaningPermission) {
       //чистим аккум
-      this.allDataMarkup = [];
+      // this.allDataMarkup = [];
 
       //забиваем карточки в акум
-      this.allDataMarkup.push(...res.data._embedded.events);
+      this.allDataMarkup = (res.data._embedded.events);
 
       console.log(this.allDataMarkup, 'акум');
 
@@ -116,20 +71,26 @@ const responseProcessing = {
         'засунем карточки в поле с очисткой поля',
         res.data._embedded.events,
       );
+
+      refs.eventGrid.innerHTML = ('beforeend', eventsGrid(res.data._embedded.events));
+
       console.log(
         'всего страниц отправим в пагинашку',
         res.data.page.totalPages,
       );
     } else {
       console.log(
-        'засунем карточки в поле без очисткой поля',
+        'засунем карточки в поле без очисткой поля ',
         res.data._embedded.events,
       );
-      this.allDataMarkup.push(...res.data._embedded.events);
+      this.allDataMarkup = res.data._embedded.events;
       console.log(this.allDataMarkup, 'акум2');
     }
   },
 };
+
+
+
 
 //Обрабатываем события интерфейса
 const eventProcessing = {
@@ -156,16 +117,20 @@ const eventProcessing = {
       .catch(err => onErrorNotification(err));
   },
 
+
   //метод запроса без очистки(пагинация)
   paginationRequest(data) {
+
     console.log('start 2', data.target.dataset.num);
 
-    //добавим данные o номере страницы
-    this.dataRequest.page = data.target.dataset.num;
+    i = i + 1
+    //добавим данные o номере страницы в объект запроса
+    this.dataRequest.page = i;
+
     console.log(this.dataRequest, 'запрос канал пагинации');
 
     //запретим очистку разметки
-    responseProcessing.cleanBan();
+    // responseProcessing.cleanBan();
 
     //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
     fetchObj
@@ -183,3 +148,55 @@ btn.addEventListener(
   'click',
   eventProcessing.paginationRequest.bind(eventProcessing),
 );
+
+
+
+//обработка первой отрисовки
+userCountry().then((response) => {
+  const data = response.data;
+  const country = data.country_code;
+  let firstRequest = { countryCode: country };
+
+  fetchObj
+    .creatingRequest(firstRequest)
+    .then(res => {
+
+      if (res.data.page.totalElements < 1) {
+        firstRequest = { keyword: "song", countryCode: "US" } //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+
+        eventProcessing.dataRequest = firstRequest
+
+        fetchObj.creatingRequest(firstRequest)
+          .then(res => {
+            console.log("ответ сервера", res);
+
+            refs.eventGrid
+              .innerHTML = ('beforeend', eventsGrid(res.data._embedded.events));
+
+            responseProcessing.allDataMarkup = (res.data._embedded.events);
+
+            console.log(
+              'всего страниц отправим в пагинашку',
+              res.data.page.totalPages,
+            );
+
+            console.log("аккум", responseProcessing.allDataMarkup);
+
+            console.log("oбъект для работы модалкой", res.data._embedded.events[11]);
+          })
+      } else {
+        refs.eventGrid
+          .innerHTML = ('beforeend', eventsGrid(res.data._embedded.events));
+
+        responseProcessing.allDataMarkup = (res.data._embedded.events);
+
+        console.log(
+          'всего страниц отправим в пагинашку',
+          res.data.page.totalPages,
+        );
+      };
+
+
+    })
+    .catch(err => onErrorNotification(err));
+})
