@@ -93,7 +93,7 @@ const responseProcessing = {
 
 
 //Обрабатываем события интерфейса
-const eventProcessing = {
+export const eventProcessing = {
 
   //хранилище последнего запроса
   dataRequest: {},
@@ -121,15 +121,13 @@ const eventProcessing = {
   //метод запроса без очистки(пагинация)
   paginationRequest(data) {
 
-    console.log('start 2', data.target.dataset.num);
-
     i = i + 1
     //добавим данные o номере страницы в объект запроса
     this.dataRequest.page = i;
 
-    console.log(this.dataRequest, 'запрос канал пагинации');
+    // console.log(this.dataRequest, 'запрос канал пагинации');
 
-    //запретим очистку разметки
+    //запретим очистку разметки, метод клиент на полное выпиливание
     // responseProcessing.cleanBan();
 
     //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
