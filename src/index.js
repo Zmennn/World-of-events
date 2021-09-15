@@ -19,21 +19,21 @@ import { userCountry } from './js/loadByLocation';
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
 // https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey={apikey}
-// https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj
+// https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvjkeyword=dance
 // https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=UK
 export function venueSearch(key) {
   return fetch(
-    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&keyword=dance`,
+    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}`,
   )
     .then(response => response.json())
     .then(data => {
-      console.log('data fetch card', data._embedded.events);
+      console.log('data fetch card', data);
       document
         .querySelector('.event-grid')
         .insertAdjacentHTML('beforeend', eventsGrid(data._embedded.events));
     });
 }
-venueSearch('Uk');
+venueSearch('CA');
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
