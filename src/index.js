@@ -13,16 +13,16 @@ const refs = getRefs()
 userCountry().then((response) => {
   const data = response.data;
   const country = data.country_code;
-  const firstRequest = { countryCode: "CA" };
+  const firstRequest = { countryCode: country };
 
   fetchObj
     .creatingRequest(firstRequest)
     .then(res => {
 
       if (res.data.page.totalElements < 1) {
-        fetchObj.creatingRequest({ countryCode: "US" })
+        fetchObj.creatingRequest({ keyword: "song", countryCode: "US" }) //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
           .then(res => {
-            console.log(res.data._embedded.events);
+            console.log("ответ сервера", res);
 
             refs.eventGrid
               .insertAdjacentHTML('beforeend', eventsGrid(res.data._embedded.events));
@@ -32,7 +32,11 @@ userCountry().then((response) => {
             console.log(
               'всего страниц отправим в пагинашку',
               res.data.page.totalPages,
-            )
+            );
+
+            console.log("аккум", responseProcessing.allDataMarkup);
+
+            console.log("oбъект для работы модалкой", res.data._embedded.events[11]);
           })
       } else {
         refs.eventGrid
