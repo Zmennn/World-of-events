@@ -1,3 +1,4 @@
+import { eventProcessing } from '../index'
 import getRefs from './get-refs';
 import countryCodes from '../country-codes.json';
 const refs = getRefs();
@@ -59,6 +60,8 @@ function showCountryEventInfo(e) {
     if (element.name === e.target.textContent) {
       refs.linkDropdownContent.classList.remove('show');
       console.log(element.code);
+
+      eventProcessing.standardRequest({ countryCode: element.code })
     }
   });
 }
