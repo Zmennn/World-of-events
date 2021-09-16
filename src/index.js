@@ -6,8 +6,10 @@ import eventsGrid from './templates/events-grid.hbs';
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
+import openModal from './js/openModal.js';
 
 const refs = getRefs();
+
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
@@ -51,8 +53,12 @@ const responseProcessing = {
 
   //обработчик инфы с сервера
   resHandler(res) {
-    console.log(res.data._embedded.events);
+
     console.log(res);
+    if (res.data.page.totalPages < 1) {
+      throw ("No data")
+    }
+
     if (this.cleaningPermission) {
       //чистим аккум
       // this.allDataMarkup = [];
@@ -147,11 +153,15 @@ userCountry().then(response => {
     .creatingRequest(firstRequest)
     .then(res => {
       if (res.data.page.totalElements < 1) {
+
         firstRequest = { keyword: 'festival', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+
+
 
         eventProcessing.dataRequest = firstRequest;
 
         fetchObj.creatingRequest(firstRequest).then(res => {
+
           /// --- уговорили картинки правильно подтягиваться
           const eventsArr = [];
           for (const event of res.data._embedded.events) {
@@ -177,6 +187,8 @@ userCountry().then(response => {
 
           refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
           /// ---
+
+       
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
           console.log(
