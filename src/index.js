@@ -2,18 +2,20 @@ import './sass/main.scss';
 import { onErrorNotification } from './pnotify';
 import countrySearch from './js/country-search';
 import pagination from './js/pagination';
-import eventsGrid from './templates/events-grid.hbs';
+
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
+
 import buyBtns from './js/buy-tickets-btns'
 const refs = getRefs();
 
-const Handlebars = require('handlebars');
-//проба на добавление хелпера hbs
-// Handlebars.registerHelper('formatRatio', function () {
-//   return 'ratio from formatRatio';
-// });
+import openModal from './js/openModal.js';
+import { preprocessingMarkup } from './js/preprocessing-markup.js'
+
+
+
+const refs = getRefs();
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
@@ -55,36 +57,29 @@ const responseProcessing = {
   // this.cleaningPermission = false;
   // },
 
-  //обработчик инфы с сервера
+  //обработчик инфы с сервера по наличию данных
   resHandler(res) {
-
     console.log(res);
     if (res.data.page.totalPages < 1) {
-      throw ("No data")
+      throw 'No data';
     }
 
     if (this.cleaningPermission) {
-      //чистим аккум
-      // this.allDataMarkup = [];
 
       //забиваем карточки в акум
       this.allDataMarkup = res.data._embedded.events;
 
-      console.log(this.allDataMarkup, 'акум');
 
-      console.log(
-        'засунем карточки в поле с очисткой поля',
-        res.data._embedded.events,
-      );
-
-      refs.eventGrid.innerHTML =
-        ('beforeend', eventsGrid(res.data._embedded.events));
+      //команда на отрисовку грида
+      preprocessingMarkup(res);
 
       console.log(
         'всего страниц отправим в пагинашку',
         res.data.page.totalPages,
       );
     } else {
+
+      //скорее всего блок елсе будет удален
       console.log(
         'засунем карточки в поле без очисткой поля ',
         res.data._embedded.events,
@@ -138,7 +133,7 @@ export const eventProcessing = {
   },
 };
 
-// eventProcessing.standardRequest({ countryCode: 'US' });
+
 
 //Тестовая кнопка
 const btn = document.querySelector('#test-button');
@@ -146,6 +141,8 @@ btn.addEventListener(
   'click',
   eventProcessing.paginationRequest.bind(eventProcessing),
 );
+
+
 
 //обработка первой отрисовки
 userCountry().then(response => {
@@ -157,18 +154,19 @@ userCountry().then(response => {
     .creatingRequest(firstRequest)
     .then(res => {
       if (res.data.page.totalElements < 1) {
-        firstRequest = { keyword: 'song', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+        firstRequest = { keyword: 'festival', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
         eventProcessing.dataRequest = firstRequest;
 
         fetchObj.creatingRequest(firstRequest).then(res => {
-          console.log('ответ сервера', res.data._embedded.events);
 
-          refs.eventGrid.innerHTML =
-            ('beforeend', eventsGrid(res.data._embedded.events));
+          //команда на отрисовку
+          preprocessingMarkup(res);
 
+          //сохранение отображенной базы данных
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
+          //заменим на вызов пагинашки
           console.log(
             'всего страниц отправим в пагинашку',
             res.data.page.totalPages,
@@ -176,15 +174,18 @@ userCountry().then(response => {
 
           console.log('аккум', responseProcessing.allDataMarkup);
 
+          //времянка, потом убрать
           console.log(
             'oбъект для работы модалкой',
             res.data._embedded.events[11],
           );
         });
       } else {
-        refs.eventGrid.innerHTML =
-          ('beforeend', eventsGrid(res.data._embedded.events));
 
+        //команда на отрисовку
+        preprocessingMarkup(res);
+
+        //сохранение отображенной базы данных
         responseProcessing.allDataMarkup = res.data._embedded.events;
 
         console.log(
