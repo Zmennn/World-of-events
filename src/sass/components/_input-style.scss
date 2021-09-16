@@ -8,7 +8,7 @@
 .container {
   display: flex;
   justify-content: center;
-  margin: 0;
+  margin: auto;
   padding: 0;
 
   @include mobile {
@@ -85,6 +85,7 @@ input[id='myInput']::placeholder {
 
 .input-event {
   margin-right: 18px;
+  margin-left: 10px;
 
   @include mobile {
     margin-bottom: 25px;

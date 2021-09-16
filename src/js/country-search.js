@@ -1,4 +1,4 @@
-import { eventProcessing } from '../index'
+import { eventProcessing } from '../index';
 import getRefs from './get-refs';
 import countryCodes from '../country-codes.json';
 const refs = getRefs();
@@ -61,15 +61,17 @@ function showCountryEventInfo(e) {
       refs.linkDropdownContent.classList.remove('show');
       console.log(element.code);
 
-      eventProcessing.standardRequest({ countryCode: element.code })
+      eventProcessing.standardRequest({ countryCode: element.code });
     }
   });
 }
-const headerZone = document.querySelector('.header__item');
-const headerZoneRight = document.querySelector('.container');
+const headerZoneItem = document.querySelector('.header__item');
+const headerZoneInput = document.querySelector('.container');
+const headerZone = document.querySelector('.header');
 headerZone.addEventListener('click', onBackdropClose);
-headerZoneRight.addEventListener('click', onBackdropClose);
-document.body.addEventListener('click', onBackdropClose);
+headerZoneItem.addEventListener('click', onBackdropClose);
+headerZoneInput.addEventListener('click', onBackdropClose);
+document.addEventListener('click', onBackdropClose);
 function onBackdropClose(e) {
   if (e.currentTarget === e.target) {
     refs.linkDropdownContent.classList.remove('show');
