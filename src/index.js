@@ -15,7 +15,7 @@ import { preprocessingMarkup } from './js/preprocessing-markup.js'
 
 
 
-const refs = getRefs();
+
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
