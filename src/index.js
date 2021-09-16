@@ -10,7 +10,6 @@ import openModal from './js/openModal.js';
 
 const refs = getRefs();
 
-
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
 // https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey={apikey}
@@ -53,10 +52,9 @@ const responseProcessing = {
 
   //обработчик инфы с сервера
   resHandler(res) {
-
     console.log(res);
     if (res.data.page.totalPages < 1) {
-      throw ("No data")
+      throw 'No data';
     }
 
     if (this.cleaningPermission) {
@@ -153,25 +151,17 @@ userCountry().then(response => {
     .creatingRequest(firstRequest)
     .then(res => {
       if (res.data.page.totalElements < 1) {
-
         firstRequest = { keyword: 'festival', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
-
-
 
         eventProcessing.dataRequest = firstRequest;
 
         fetchObj.creatingRequest(firstRequest).then(res => {
-
           /// --- уговорили картинки правильно подтягиваться
           const eventsArr = [];
           for (const event of res.data._embedded.events) {
             let currentImg = event.images[0].url;
             for (const image of event.images) {
               if (image.width === 305 && image.ratio === '4_3') {
-                currentImg = image.url;
-              } else if (image.width === 640 && image.ratio === '3_2') {
-                currentImg = image.url;
-              } else if (image.width === 1024 && image.ratio === '16_9') {
                 currentImg = image.url;
               }
             }
@@ -184,11 +174,11 @@ userCountry().then(response => {
             };
             eventsArr.push(cardObj);
           }
-
+          console.log('eventsArr', eventsArr);
+          console.log('res.data._embedded.events', res.data._embedded.events);
           refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
           /// ---
 
-       
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
           console.log(
