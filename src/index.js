@@ -7,9 +7,7 @@ import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
 
-
-const refs = getRefs()
-
+const refs = getRefs();
 
 //Временный костыль для создания верстки, консоль заменить на вызов шаблона
 // https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
@@ -29,9 +27,6 @@ export function venueSearch(key) {
     });
 }
 // venueSearch('CA');
-
-
-
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
@@ -63,7 +58,7 @@ const responseProcessing = {
       // this.allDataMarkup = [];
 
       //забиваем карточки в акум
-      this.allDataMarkup = (res.data._embedded.events);
+      this.allDataMarkup = res.data._embedded.events;
 
       console.log(this.allDataMarkup, 'акум');
 
@@ -72,7 +67,8 @@ const responseProcessing = {
         res.data._embedded.events,
       );
 
-      refs.eventGrid.innerHTML = ('beforeend', eventsGrid(res.data._embedded.events));
+      refs.eventGrid.innerHTML =
+        ('beforeend', eventsGrid(res.data._embedded.events));
 
       console.log(
         'всего страниц отправим в пагинашку',
@@ -89,12 +85,8 @@ const responseProcessing = {
   },
 };
 
-
-
-
 //Обрабатываем события интерфейса
 export const eventProcessing = {
-
   //хранилище последнего запроса
   dataRequest: {},
 
@@ -117,11 +109,9 @@ export const eventProcessing = {
       .catch(err => onErrorNotification(err));
   },
 
-
   //метод запроса без очистки(пагинация)
   paginationRequest(data) {
-
-    i = i + 1
+    i = i + 1;
     //добавим данные o номере страницы в объект запроса
     this.dataRequest.page = i;
 
@@ -147,10 +137,8 @@ btn.addEventListener(
   eventProcessing.paginationRequest.bind(eventProcessing),
 );
 
-
-
 //обработка первой отрисовки
-userCountry().then((response) => {
+userCountry().then(response => {
   const data = response.data;
   const country = data.country_code;
   let firstRequest = { countryCode: country };
@@ -158,43 +146,62 @@ userCountry().then((response) => {
   fetchObj
     .creatingRequest(firstRequest)
     .then(res => {
-
       if (res.data.page.totalElements < 1) {
-        firstRequest = { keyword: "song", countryCode: "US" } //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+        firstRequest = { keyword: 'festival', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
-        eventProcessing.dataRequest = firstRequest
+        eventProcessing.dataRequest = firstRequest;
 
-        fetchObj.creatingRequest(firstRequest)
-          .then(res => {
-            console.log("ответ сервера", res);
+        fetchObj.creatingRequest(firstRequest).then(res => {
+          /// --- уговорили картинки правильно подтягиваться
+          const eventsArr = [];
+          for (const event of res.data._embedded.events) {
+            let currentImg = event.images[0].url;
+            for (const image of event.images) {
+              if (image.width === 305 && image.ratio === '4_3') {
+                currentImg = image.url;
+              } else if (image.width === 640 && image.ratio === '3_2') {
+                currentImg = image.url;
+              } else if (image.width === 1024 && image.ratio === '16_9') {
+                currentImg = image.url;
+              }
+            }
+            const cardObj = {
+              id: event.id,
+              name: event.name,
+              date: event.dates.start.localDate,
+              address: event._embedded.venues[0].name,
+              image: currentImg,
+            };
+            eventsArr.push(cardObj);
+          }
 
-            refs.eventGrid
-              .innerHTML = ('beforeend', eventsGrid(res.data._embedded.events));
+          refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
+          /// ---
+          responseProcessing.allDataMarkup = res.data._embedded.events;
 
-            responseProcessing.allDataMarkup = (res.data._embedded.events);
+          console.log(
+            'всего страниц отправим в пагинашку',
+            res.data.page.totalPages,
+          );
 
-            console.log(
-              'всего страниц отправим в пагинашку',
-              res.data.page.totalPages,
-            );
+          console.log('аккум', responseProcessing.allDataMarkup);
 
-            console.log("аккум", responseProcessing.allDataMarkup);
-
-            console.log("oбъект для работы модалкой", res.data._embedded.events[11]);
-          })
+          console.log(
+            'oбъект для работы модалкой',
+            res.data._embedded.events[11],
+          );
+        });
       } else {
-        refs.eventGrid
-          .innerHTML = ('beforeend', eventsGrid(res.data._embedded.events));
+        refs.eventGrid.innerHTML =
+          ('beforeend', eventsGrid(res.data._embedded.events));
 
-        responseProcessing.allDataMarkup = (res.data._embedded.events);
+        responseProcessing.allDataMarkup = res.data._embedded.events;
 
         console.log(
           'всего страниц отправим в пагинашку',
           res.data.page.totalPages,
         );
-      };
-
-
+      }
     })
     .catch(err => onErrorNotification(err));
-})
+});
