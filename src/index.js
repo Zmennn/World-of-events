@@ -6,6 +6,7 @@ import eventsGrid from './templates/events-grid.hbs';
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
+import openModal from './js/openModal.js';
 
 const refs = getRefs();
 

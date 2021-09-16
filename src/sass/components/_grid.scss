@@ -32,6 +32,7 @@
   // background-color: tomato;
   list-style: none;
   min-height: 228px;
+  cursor: pointer;
 
   @include tablet {
     min-height: 312px;
