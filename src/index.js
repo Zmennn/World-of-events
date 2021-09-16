@@ -2,11 +2,13 @@ import './sass/main.scss';
 import { onErrorNotification } from './pnotify';
 import countrySearch from './js/country-search';
 import pagination from './js/pagination';
-import eventsGrid from './templates/events-grid.hbs';
+
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
 import openModal from './js/openModal.js';
+import { preprocessingMarkup } from './js/preprocessing-markup.js'
+
 
 const refs = getRefs();
 
@@ -50,7 +52,7 @@ const responseProcessing = {
   // this.cleaningPermission = false;
   // },
 
-  //обработчик инфы с сервера
+  //обработчик инфы с сервера по наличию данных
   resHandler(res) {
     console.log(res);
     if (res.data.page.totalPages < 1) {
@@ -58,27 +60,21 @@ const responseProcessing = {
     }
 
     if (this.cleaningPermission) {
-      //чистим аккум
-      // this.allDataMarkup = [];
 
       //забиваем карточки в акум
       this.allDataMarkup = res.data._embedded.events;
 
-      console.log(this.allDataMarkup, 'акум');
 
-      console.log(
-        'засунем карточки в поле с очисткой поля',
-        res.data._embedded.events,
-      );
-
-      refs.eventGrid.innerHTML =
-        ('beforeend', eventsGrid(res.data._embedded.events));
+      //команда на отрисовку грида
+      preprocessingMarkup(res);
 
       console.log(
         'всего страниц отправим в пагинашку',
         res.data.page.totalPages,
       );
     } else {
+
+      //скорее всего блок елсе будет удален
       console.log(
         'засунем карточки в поле без очисткой поля ',
         res.data._embedded.events,
@@ -132,7 +128,7 @@ export const eventProcessing = {
   },
 };
 
-// eventProcessing.standardRequest({ countryCode: 'US' });
+
 
 //Тестовая кнопка
 const btn = document.querySelector('#test-button');
@@ -140,6 +136,8 @@ btn.addEventListener(
   'click',
   eventProcessing.paginationRequest.bind(eventProcessing),
 );
+
+
 
 //обработка первой отрисовки
 userCountry().then(response => {
@@ -156,31 +154,14 @@ userCountry().then(response => {
         eventProcessing.dataRequest = firstRequest;
 
         fetchObj.creatingRequest(firstRequest).then(res => {
-          /// --- уговорили картинки правильно подтягиваться
-          const eventsArr = [];
-          for (const event of res.data._embedded.events) {
-            let currentImg = event.images[0].url;
-            for (const image of event.images) {
-              if (image.width === 305 && image.ratio === '4_3') {
-                currentImg = image.url;
-              }
-            }
-            const cardObj = {
-              id: event.id,
-              name: event.name,
-              date: event.dates.start.localDate,
-              address: event._embedded.venues[0].name,
-              image: currentImg,
-            };
-            eventsArr.push(cardObj);
-          }
-          console.log('eventsArr', eventsArr);
-          console.log('res.data._embedded.events', res.data._embedded.events);
-          refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
-          /// ---
 
+          //команда на отрисовку
+          preprocessingMarkup(res);
+
+          //сохранение отображенной базы данных
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
+          //заменим на вызов пагинашки
           console.log(
             'всего страниц отправим в пагинашку',
             res.data.page.totalPages,
@@ -188,15 +169,18 @@ userCountry().then(response => {
 
           console.log('аккум', responseProcessing.allDataMarkup);
 
+          //времянка, потом убрать
           console.log(
             'oбъект для работы модалкой',
             res.data._embedded.events[11],
           );
         });
       } else {
-        refs.eventGrid.innerHTML =
-          ('beforeend', eventsGrid(res.data._embedded.events));
 
+        //команда на отрисовку
+        preprocessingMarkup(res);
+
+        //сохранение отображенной базы данных
         responseProcessing.allDataMarkup = res.data._embedded.events;
 
         console.log(
