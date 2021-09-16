@@ -20,9 +20,7 @@
 .pagination__link {
   display: inline-block;
   text-align: center;
-  padding-bottom: 6px;
-  padding-top: 6px;
-  width: 30px;
+  padding: 6px 12px;
   border: none;
   cursor: pointer;
   color: #fff;
@@ -58,4 +56,10 @@
   border: 1px solid var(--accent-color);
   border-radius: 10px 0px;
   color: var(--accent-color);
+}
+
+.pagination__link--dots {
+  cursor: auto;
+  pointer-events: none;
+  color: #fff;
 }
