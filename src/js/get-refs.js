@@ -10,5 +10,6 @@ export default function getRefs() {
     linkDropdownIcon: document.querySelector('.drop-button__icon'),
 
     eventGrid: document.querySelector('.event-grid'),
+    buyBtn: document.querySelector('.buy-js'),
   };
 }

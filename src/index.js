@@ -6,8 +6,13 @@ import pagination from './js/pagination';
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
+
+import buyBtns from './js/buy-tickets-btns'
+const refs = getRefs();
+
 import openModal from './js/openModal.js';
 import { preprocessingMarkup } from './js/preprocessing-markup.js'
+
 
 
 const refs = getRefs();
