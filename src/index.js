@@ -156,6 +156,7 @@ userCountry().then(response => {
       if (res.data.page.totalElements < 1) {
         firstRequest = { keyword: 'festival', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
+        //сохранение запроса 
         eventProcessing.dataRequest = firstRequest;
 
         fetchObj.creatingRequest(firstRequest).then(res => {
@@ -184,6 +185,10 @@ userCountry().then(response => {
 
         //команда на отрисовку
         preprocessingMarkup(res);
+
+        //сохранение запроса 
+        eventProcessing.dataRequest = firstRequest;
+
 
         //сохранение отображенной базы данных
         responseProcessing.allDataMarkup = res.data._embedded.events;
