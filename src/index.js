@@ -57,8 +57,12 @@ const responseProcessing = {
 
   //обработчик инфы с сервера
   resHandler(res) {
-    console.log(res.data._embedded.events);
+
     console.log(res);
+    if (res.data.page.totalPages < 1) {
+      throw ("No data")
+    }
+
     if (this.cleaningPermission) {
       //чистим аккум
       // this.allDataMarkup = [];

@@ -1,5 +1,5 @@
 .event-grid {
-  padding: 0;
+  padding-top: 9px;
   margin: 0 auto;
   display: grid;
   justify-content: center;
@@ -16,12 +16,14 @@
   grid-gap: 30px 4px;
 
   @include tablet {
+    padding-top: 13px;
     max-width: calc(100% - 158px);
     grid-template-columns: repeat(3, 194px);
     // grid-template-columns: repeat(3, minmax(194px, 1fr));
     grid-gap: 45px 13px;
   }
   @include desktop {
+    padding-top: 13px;
     max-width: calc(100% - 334px);
     grid-template-columns: repeat(4, 194px);
     // grid-template-columns: repeat(4, minmax(194px, 1fr));
