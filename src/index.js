@@ -39,7 +39,7 @@ export function venueSearch(key) {
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
 
-
+//обработка ответа сервера
 const responseProcessing = {
   //накопитель объектов отрисованной разметки
   allDataMarkup: [],
