@@ -10,5 +10,7 @@ export default function getRefs() {
     linkDropdownIcon: document.querySelector('.drop-button__icon'),
 
     eventGrid: document.querySelector('.event-grid'),
+    buyStandartTickets: document.querySelector('.btn-buy-standart'),
+    buyVipTickets: document.querySelector('.btn-buy-vip'),
   };
 }

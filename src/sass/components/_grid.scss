@@ -1,11 +1,11 @@
 .event-grid {
-  padding: 0;
+  padding-top: 9px;
   margin: 0 auto;
   display: grid;
   justify-content: center;
   max-width: calc(100% - 40px);
   //  если нужно до следующего перелома жестко зафиксить размер карточки
-  grid-template-columns: repeat(2, 138px);
+  grid-template-columns: repeat(1, 138px);
 
   //  если до следующего перелома размер карточки будет растягиваться и их остается 2
   // grid-template-columns: repeat(2, minmax(138px, 1fr));
@@ -15,13 +15,19 @@
   //  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
   grid-gap: 30px 4px;
 
+  @include mobile {
+    grid-template-columns: repeat(2, 138px);
+  }
+
   @include tablet {
+    padding-top: 13px;
     max-width: calc(100% - 158px);
     grid-template-columns: repeat(3, 194px);
     // grid-template-columns: repeat(3, minmax(194px, 1fr));
     grid-gap: 45px 13px;
   }
   @include desktop {
+    padding-top: 13px;
     max-width: calc(100% - 334px);
     grid-template-columns: repeat(4, 194px);
     // grid-template-columns: repeat(4, minmax(194px, 1fr));
@@ -32,6 +38,7 @@
   // background-color: tomato;
   list-style: none;
   min-height: 228px;
+  cursor: pointer;
 
   @include tablet {
     min-height: 312px;

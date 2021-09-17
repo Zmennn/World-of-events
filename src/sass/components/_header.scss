@@ -1,6 +1,25 @@
-.header__container {
-  position: relative; 
+
+.header__content {
+ position: relative;
+   
+  @include desktop {
+   padding-bottom: 133px;   
+  }
+  
+  @include tablet  {
+    padding-bottom: 123px;   
+  }
+
+  @include  mobile {
+    padding-bottom: 52px;
+  }
+
+  @include mini {
+    padding-bottom: 32px;  
+  }
+
 }
+
 
 .logo {   
     position: absolute;
