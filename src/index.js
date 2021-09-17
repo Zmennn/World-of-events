@@ -40,7 +40,7 @@ export function venueSearch(key) {
 
 
 //обработка ответа сервера
-const responseProcessing = {
+export const responseProcessing = {
   //накопитель объектов отрисованной разметки
   allDataMarkup: [],
 
