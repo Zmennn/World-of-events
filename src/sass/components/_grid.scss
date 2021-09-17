@@ -5,7 +5,7 @@
   justify-content: center;
   max-width: calc(100% - 40px);
   //  если нужно до следующего перелома жестко зафиксить размер карточки
-  grid-template-columns: repeat(2, 138px);
+  grid-template-columns: repeat(1, 138px);
 
   //  если до следующего перелома размер карточки будет растягиваться и их остается 2
   // grid-template-columns: repeat(2, minmax(138px, 1fr));
@@ -14,6 +14,10 @@
   //  но количество в строке будет увеличиваться
   //  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
   grid-gap: 30px 4px;
+
+  @include mobile {
+    grid-template-columns: repeat(2, 138px);
+  }
 
   @include tablet {
     padding-top: 13px;
