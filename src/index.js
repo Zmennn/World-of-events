@@ -38,14 +38,14 @@ export function venueSearch(key) {
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
-let i = 0;
+
 
 const responseProcessing = {
   //накопитель объектов отрисованной разметки
   allDataMarkup: [],
 
   //ключ разрешения очистки
-  cleaningPermission: true,
+  cleaningPermission: false,
 
   //метод разрешения очистки
   cleanPermission() {
@@ -53,15 +53,17 @@ const responseProcessing = {
   },
 
   //метод запрещения очистки
-  // cleanBan() {
-  // this.cleaningPermission = false;
-  // },
+  cleanBan() {
+    this.cleaningPermission = false;
+  },
 
-  //обработчик инфы с сервера по наличию данных
+  //обработчик инфы с сервера
   resHandler(res) {
     console.log(res);
+
+    //обработчик инфы с сервера по наличию данных
     if (res.data.page.totalPages < 1) {
-      throw 'No data';
+      throw 'No information for this request';
     }
 
     if (this.cleaningPermission) {
@@ -73,19 +75,23 @@ const responseProcessing = {
       //команда на отрисовку грида
       preprocessingMarkup(res);
 
-      console.log(
-        'всего страниц отправим в пагинашку',
-        res.data.page.totalPages,
-      );
+      // console.log(
+      //   'всего страниц отправим в пагинашку',
+      //   res.data.page.totalPages,
+      // );
+      pagination(res.data.page.totalPages);
     } else {
 
-      //скорее всего блок елсе будет удален
+      //отрисовка без изменения пагин
       console.log(
-        'засунем карточки в поле без очисткой поля ',
+        'засунем карточки в поле без очистки пагин ',
         res.data._embedded.events,
       );
+
+      preprocessingMarkup(res);
+
       this.allDataMarkup = res.data._embedded.events;
-      console.log(this.allDataMarkup, 'акум2');
+      ;
     }
   },
 };
@@ -116,14 +122,14 @@ export const eventProcessing = {
 
   //метод запроса без очистки(пагинация)
   paginationRequest(data) {
-    i = i + 1;
+
     //добавим данные o номере страницы в объект запроса
-    this.dataRequest.page = i;
+    this.dataRequest.page = data;
 
     // console.log(this.dataRequest, 'запрос канал пагинации');
 
-    //запретим очистку разметки, метод клиент на полное выпиливание
-    // responseProcessing.cleanBan();
+    //запретим очистку разметки
+    responseProcessing.cleanBan();
 
     //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
     fetchObj
@@ -133,14 +139,6 @@ export const eventProcessing = {
   },
 };
 
-
-
-//Тестовая кнопка
-const btn = document.querySelector('#test-button');
-btn.addEventListener(
-  'click',
-  eventProcessing.paginationRequest.bind(eventProcessing),
-);
 
 
 
@@ -154,7 +152,7 @@ userCountry().then(response => {
     .creatingRequest(firstRequest)
     .then(res => {
       if (res.data.page.totalElements < 1) {
-        firstRequest = { keyword: 'festival', countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+        firstRequest = { countryCode: 'US', keyword: 'dance' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
         //сохранение запроса 
         eventProcessing.dataRequest = firstRequest;
@@ -168,12 +166,11 @@ userCountry().then(response => {
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
           //заменим на вызов пагинашки
-          console.log(
-            'всего страниц отправим в пагинашку',
-            res.data.page.totalPages,
-          );
 
-          console.log('аккум', responseProcessing.allDataMarkup);
+          //вызов пагинации
+          pagination(res.data.page.totalPages);
+
+
 
           //времянка, потом убрать
           console.log(
@@ -193,10 +190,8 @@ userCountry().then(response => {
         //сохранение отображенной базы данных
         responseProcessing.allDataMarkup = res.data._embedded.events;
 
-        console.log(
-          'всего страниц отправим в пагинашку',
-          res.data.page.totalPages,
-        );
+
+        pagination(res.data.page.totalPages)
       }
     })
     .catch(err => onErrorNotification(err));
