@@ -1,7 +1,7 @@
 import getRefs from './get-refs';
 import eventsGrid from '../templates/events-grid.hbs';
 const refs = getRefs();
-console.log(refs);
+
 
 export function preprocessingMarkup(res) {
     const eventsArr = [];
@@ -23,7 +23,6 @@ export function preprocessingMarkup(res) {
         };
         eventsArr.push(cardObj);
     }
-    console.log('eventsArr', eventsArr);
-    console.log('res.data._embedded.events', res.data._embedded.events);
+
     refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
 }

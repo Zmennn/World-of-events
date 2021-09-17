@@ -1,4 +1,5 @@
 import paginationTpl from '../templates/pagination.hbs'
+import { eventProcessing } from '../index'
 
 const refs = {
     output: document.querySelector('.js-pagination'),
@@ -17,7 +18,7 @@ export default function pagination(pages) {
 }
 
 function paginationShort(pages) {
-    for (let i = 0; i < pages; i++){
+    for (let i = 0; i < pages; i++) {
         array[i] = i + 1;
     }
     refs.output.innerHTML = paginationTpl(array);
@@ -34,18 +35,19 @@ function onClickShort(e) {
     prevPage = currPage;
     currPage = e.target.textContent;
 
-    for (let item of links) {        
+    for (let item of links) {
         if (item.textContent === prevPage) {
             item.classList.remove('pagination__item--current');
         }
     }
-    for (let item of links) {        
+    for (let item of links) {
         if (item.textContent === currPage) {
             item.classList.add('pagination__item--current');
         }
     }
-  
+
     console.log('current page:', currPage);
+    eventProcessing.paginationRequest(currPage)
     return currPage;
 }
 
@@ -54,12 +56,12 @@ function paginationLong(pages) {
     refs.output.innerHTML = paginationTpl(array);
     refs.output.addEventListener('click', onClick);
     links = document.querySelectorAll('.pagination__link');
-    for (let item of links) {        
+    for (let item of links) {
         if (item.textContent === '...') {
             item.classList.add('pagination__link--dots');
         }
     }
-    
+
 }
 function onClick(e) {
     e.preventDefault();
@@ -75,6 +77,7 @@ function onClick(e) {
         array = [1, 2, 3, 4, 5, '...', parseInt(links[6].textContent)];
         longPaginationMarkup(array, links, currPage, prevPage);
         console.log('current page:', currPage);
+        eventProcessing.paginationRequest(currPage)
         return currPage;
     }
 
@@ -82,6 +85,7 @@ function onClick(e) {
         array = [1, '...', parseInt(currPage) - 1, currPage, parseInt(currPage) + 1, '...', parseInt(links[6].textContent)];
         longPaginationMarkup(array, links, currPage, prevPage);
         console.log('current page:', currPage);
+        eventProcessing.paginationRequest(currPage)
         return currPage;
     }
 
@@ -90,29 +94,29 @@ function onClick(e) {
             parseInt(links[6].textContent) - 2, parseInt(links[6].textContent) - 1, parseInt(links[6].textContent)];
         longPaginationMarkup(array, links, currPage, prevPage);
         console.log('current page:', currPage);
+        eventProcessing.paginationRequest(currPage)
         return currPage;
     }
 }
 function longPaginationMarkup(array, links, currPage, prevPage) {
     refs.output.innerHTML = paginationTpl(array);
-        links = document.querySelectorAll('.pagination__link');
-        for (let item of links) {
-            if (item.textContent === '...') {
-                item.classList.add('pagination__link--dots');
-                item.classList.remove('pagination__link');
-            }
+    links = document.querySelectorAll('.pagination__link');
+    for (let item of links) {
+        if (item.textContent === '...') {
+            item.classList.add('pagination__link--dots');
+            item.classList.remove('pagination__link');
         }
+    }
 
-        for (let item of links) {
-            if (item.textContent === prevPage) {
-                item.classList.remove('pagination__item--current');
-            }
+    for (let item of links) {
+        if (item.textContent === prevPage) {
+            item.classList.remove('pagination__item--current');
         }
-        for (let item of links) {
-            if (item.textContent === currPage) {
-                item.classList.add('pagination__item--current');
-            }
+    }
+    for (let item of links) {
+        if (item.textContent === currPage) {
+            item.classList.add('pagination__item--current');
         }
+    }
 }
 
-pagination(13);
