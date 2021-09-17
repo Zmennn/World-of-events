@@ -14,28 +14,6 @@ import openModal from './js/openModal.js';
 import { preprocessingMarkup } from './js/preprocessing-markup.js'
 
 
-
-
-
-//Временный костыль для создания верстки, консоль заменить на вызов шаблона
-// https://app.ticketmaster.com/discovery/v2/venues.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}
-// https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey={apikey}
-// https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvjkeyword=dance
-// https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=UK
-export function venueSearch(key) {
-  return fetch(
-    `https://app.ticketmaster.com/discovery/v2/events.json?apikey=AmacJHw1PVxi43hxMLwa56XAbBAafJvj&countryCode=${key}`,
-  )
-    .then(response => response.json())
-    .then(data => {
-      console.log('data fetch card', data._embedded.events);
-      document
-        .querySelector('.event-grid')
-        .insertAdjacentHTML('beforeend', eventsGrid(data._embedded.events));
-    });
-}
-// venueSearch('CA');
-
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
 
@@ -81,14 +59,11 @@ export const responseProcessing = {
       // );
       pagination(res.data.page.totalPages);
     } else {
-
-      //отрисовка без изменения пагин
-      console.log(
-        'засунем карточки в поле без очистки пагин ',
-        res.data._embedded.events,
-      );
+      //отрисовка без перерисовки пагинации
 
       preprocessingMarkup(res);
+
+      refs.eventGrid.scrollIntoView({ behavior: "smooth" });
 
       this.allDataMarkup = res.data._embedded.events;
       ;
@@ -169,7 +144,6 @@ userCountry().then(response => {
 
           //вызов пагинации
           pagination(res.data.page.totalPages);
-
 
 
           //времянка, потом убрать
