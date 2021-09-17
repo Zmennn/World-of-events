@@ -7,7 +7,7 @@ function onBuyStandartTicketBtnClick(event) {
         return
     }
     let url = refs.buyStandartTickets.getAttribute('data-link')
-    refs.buyStandartTickets.onclick = location.href=`${url}`
+    refs.buyStandartTickets.onclick=  window.open(`${url}`,'_blank')
     // console.log(refs.buyStandartTickets.getAttribute('data-link'))
 }
 function onBuyVipTicketBtnClick(event) {
@@ -15,7 +15,7 @@ function onBuyVipTicketBtnClick(event) {
         return
     }
     let url = refs.buyVipTickets.getAttribute('data-link')
-    refs.buyVipTickets.onclick = location.href=`${url}`
+    refs.buyVipTickets.onclick=  window.open(`${url}`,'_blank')
     // console.log(refs.buyVipTickets.getAttribute('data-link'))
 }
 
