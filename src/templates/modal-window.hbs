@@ -1,0 +1,48 @@
+{{#each this}}
+<div class="modal-container">
+    <button class="btn-close">
+        <svg width="18" height="18">
+            <use href="./images/sprite.svg#icon-close"></use>
+        </svg>   
+    </button>
+    <div class="round-picture">
+      <img class="round-picture__img" src="{{ this.images.1.url}}" alt="">
+    </div>
+    <div class="modal-content">
+        <div class="modal-image">
+            <img class="modal-image__img" src="{{ this.images.1.url}}" alt="">
+        </div>
+<div class="modal-main-info">
+<ul class="modal-list">
+  <li class="modal-item-name">INFO
+<p class="modal-item-text">{{this.promoter.description}}</p>
+  </li>
+  <li class="modal-item-name">WHEN
+    <p class="modal-item-text">{{this.dates.start.localDate}}</p>
+  </li>
+  <li class="modal-item-name">WHERE
+    <p class="modal-item-text">{{this._embedded.venues.0.name}}</p>
+  </li>
+  <li class="modal-item-name">WHO
+    <p class="modal-item-text"> {{this.name}}</p>
+  </li>
+  <li class="modal-item-name">PRICES
+      <p class="price">{{this.priceRanges.0.type}} {{this.priceRanges.0.min}} {{this.priceRanges.0.max}} {{this.priceRanges.0.currency}}
+        <svg class="ticket-icon" width="18" height="18">
+            <use href="./images/sprite.svg#icon-ticket"></use>
+        </svg> 
+      </p>
+    <button class="btn-buy">BUY TICKETS</button>
+    <p class="price">{{this.priceRanges.0.type}} {{this.priceRanges.0.min}} {{this.priceRanges.0.max}} {{this.priceRanges.0.currency}}
+        <svg class="ticket-icon" width="18" height="18">
+            <use href="./images/sprite.svg#icon-ticket"></use>
+        </svg> 
+    </p>
+    <button class="btn-buy">BUY TICKETS</button>
+  </li>
+</ul>
+</div>
+    </div>
+    <button class="btn-more-from">MORE FROM THIS AUTHOR</button>
+  </div>
+{{/each}}
