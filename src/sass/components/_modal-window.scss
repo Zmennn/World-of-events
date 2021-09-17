@@ -7,6 +7,12 @@
     margin: auto;
     background: var(--modal-background-color);
     border-radius: 300px 0px;
+    position:relative;
+}
+
+.round-picture img {
+    margin: 32px auto 41px auto;
+    border-radius: 50%;
 }
 
 .modal-item-name {
@@ -17,9 +23,16 @@
 }
 
 .modal-list {
-    margin: -16px, 0px, -16px, 0px;
-    padding: 0px, 0px 0px -40px;
+    margin: -16px 0px -16px 0px;
+    padding: 0px 0px 0px 40px;
 }
+
+.modal-item-text,
+.price {
+    color: var(--modal-text-color);
+}
+
+
 
 /////Кнопки и псевдо/////
 .btn-buy {
@@ -38,15 +51,20 @@
     border: 1px;
     border-color: var(--modal-button-background);
     color: var(--modal-button-background);
+    margin: 21px auto 32px auto;
+    display: block;
+    border-style: solid;
 }
-
 .btn-close {
     background: transparent;
     outline: none;
     border: 0;
-    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 25px;
+    height: 25px;
 }
-
 .ticket-icon {
     margin-left: 13px;
 }
@@ -65,9 +83,9 @@
         padding: 30px 30px 62px 30px;
     }
     .round-picture img {
-        margin: 32px, auto, 41px, auto;
-        width: 132px;
-        height: 132px;
+        margin: 32px auto 41px auto;
+        max-width: 132px;
+        max-height: 132px;
     }
     .modal-image img {
         max-width: 360px;
@@ -121,8 +139,8 @@
     }
     .round-picture img {
         margin: 28px, auto, 43px, auto;
-        width: 70px;
-        height: 70px;
+        max-width: 70px;
+        max-height: 70px;
     }
     .modal-image img {
         max-width: 233px;
@@ -149,6 +167,14 @@
         margin-top: 5px;
         margin-bottom: 10px;
     }
+
+    .btn-close {
+        right: 25px;
+        top: 25px;
+        width: 17px;
+        height: 17px;
+    }
+
     .btn-more-from {
         width: 255px;
         height: 40px;
@@ -160,8 +186,8 @@
     }
 }
 
-//////////// Мобилка 320-363.98 ////////////
-@media screen and (max-width: 363.98px) and (min-width: 320px) {
+//////////// Мобилка 320-767.98 ////////////
+@media screen and (max-width: 767.98px) and (min-width: 320px) {
     .modal-container {
         height: 915px;
         width: 272px;
@@ -169,8 +195,8 @@
     }
     .round-picture img {
         margin: 72px, auto, 18px, auto;
-        width: 102px;
-        height: 102px;
+        max-width: 102px;
+        max-height: 102px;
     }
     .modal-image img {
         display: none;
@@ -198,6 +224,12 @@
     }
     .btn-buy {
         margin-bottom: 15px;
+    }
+    .btn-close {
+        right: 25px;
+        top: 25px;
+        width: 17px;
+        height: 17px;
     }
     .btn-more-from {
         width: 255px;
