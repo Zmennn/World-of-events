@@ -46,4 +46,15 @@
   @include desktop {
     min-height: 312px;
   }
+
+  &:nth-child(odd){
+    animation: fadeInDown;
+    animation-duration: 1.5s;
+  }
+
+  &:nth-child(even){
+    animation: fadeInUp;
+    animation-duration: 1.5s;
+    // animation-delay: 250ms;
+  }
 }

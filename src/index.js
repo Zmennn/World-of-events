@@ -7,116 +7,108 @@ import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
 
-import buyBtns from './js/buy-tickets-btns'
+import buyBtns from './js/buy-tickets-btns';
 const refs = getRefs();
 import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
+import { firstVisit } from './js/page-first-visit.js';
 
-
-
-
+firstVisit();
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
-
 //обработка ответа сервера
 export const responseProcessing = {
-    //накопитель объектов отрисованной разметки
-    allDataMarkup: [],
+  //накопитель объектов отрисованной разметки
+  allDataMarkup: [],
 
-    //ключ разрешения очистки
-    cleaningPermission: false,
+  //ключ разрешения очистки
+  cleaningPermission: false,
 
-    //метод разрешения очистки
-    cleanPermission() {
-        this.cleaningPermission = true;
-    },
+  //метод разрешения очистки
+  cleanPermission() {
+    this.cleaningPermission = true;
+  },
 
-    //метод запрещения очистки
-    cleanBan() {
-        this.cleaningPermission = false;
-    },
+  //метод запрещения очистки
+  cleanBan() {
+    this.cleaningPermission = false;
+  },
 
-    //обработчик инфы с сервера
-    resHandler(res) {
-        console.log(res);
+  //обработчик инфы с сервера
+  resHandler(res) {
+    console.log(res);
 
-        //обработчик инфы с сервера по наличию данных
-        if (res.data.page.totalPages < 1) {
-            throw 'No information for this request';
-        }
+    //обработчик инфы с сервера по наличию данных
+    if (res.data.page.totalPages < 1) {
+      throw 'No information for this request';
+    }
 
-        if (this.cleaningPermission) {
+    if (this.cleaningPermission) {
+      //забиваем карточки в акум
+      this.allDataMarkup = res.data._embedded.events;
 
-            //забиваем карточки в акум
-            this.allDataMarkup = res.data._embedded.events;
+      //команда на отрисовку грида
+      preprocessingMarkup(res);
 
+      // console.log(
+      //   'всего страниц отправим в пагинашку',
+      //   res.data.page.totalPages,
+      // );
+      pagination(res.data.page.totalPages);
+    } else {
+      //отрисовка без перерисовки пагинации
 
-            //команда на отрисовку грида
-            preprocessingMarkup(res);
+      preprocessingMarkup(res);
 
-            // console.log(
-            //   'всего страниц отправим в пагинашку',
-            //   res.data.page.totalPages,
-            // );
-            pagination(res.data.page.totalPages);
-        } else {
-            //отрисовка без перерисовки пагинации
+      refs.eventGrid.scrollIntoView({ behavior: 'smooth' });
 
-            preprocessingMarkup(res);
-
-            refs.eventGrid.scrollIntoView({ behavior: "smooth" });
-
-            this.allDataMarkup = res.data._embedded.events;;
-        }
-    },
+      this.allDataMarkup = res.data._embedded.events;
+    }
+  },
 };
 
 //Обрабатываем события интерфейса
 export const eventProcessing = {
-    //хранилище последнего запроса
-    dataRequest: {},
+  //хранилище последнего запроса
+  dataRequest: {},
 
-    //метод запроса с очисткой
-    standardRequest(data) {
-        console.log('start 1');
+  //метод запроса с очисткой
+  standardRequest(data) {
+    console.log('start 1');
 
-        //сохраним последний запрос
-        this.dataRequest = {};
-        this.dataRequest = data;
-        console.log(this.dataRequest, 'объект первого запроса');
+    //сохраним последний запрос
+    this.dataRequest = {};
+    this.dataRequest = data;
+    console.log(this.dataRequest, 'объект первого запроса');
 
-        //разрешим очистку разметки
-        responseProcessing.cleanPermission();
+    //разрешим очистку разметки
+    responseProcessing.cleanPermission();
 
-        //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
-        fetchObj
-            .creatingRequest(this.dataRequest)
-            .then(res => responseProcessing.resHandler(res))
-            .catch(err => onErrorNotification(err));
-    },
+    //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
+    fetchObj
+      .creatingRequest(this.dataRequest)
+      .then(res => responseProcessing.resHandler(res))
+      .catch(err => onErrorNotification(err));
+  },
 
-    //метод запроса без очистки(пагинация)
-    paginationRequest(data) {
+  //метод запроса без очистки(пагинация)
+  paginationRequest(data) {
+    //добавим данные o номере страницы в объект запроса
+    this.dataRequest.page = data;
 
-        //добавим данные o номере страницы в объект запроса
-        this.dataRequest.page = data;
+    // console.log(this.dataRequest, 'запрос канал пагинации');
 
-        // console.log(this.dataRequest, 'запрос канал пагинации');
+    //запретим очистку разметки
+    responseProcessing.cleanBan();
 
-        //запретим очистку разметки
-        responseProcessing.cleanBan();
-
-        //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
-        fetchObj
-            .creatingRequest(this.dataRequest)
-            .then(res => responseProcessing.resHandler(res))
-            .catch(err => onErrorNotification(err));
-    },
+    //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
+    fetchObj
+      .creatingRequest(this.dataRequest)
+      .then(res => responseProcessing.resHandler(res))
+      .catch(err => onErrorNotification(err));
+  },
 };
-
-
-
 
 //обработка первой отрисовки
 userCountry().then(response => {
