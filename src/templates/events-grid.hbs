@@ -1,10 +1,10 @@
 {{#each this}}
 <li class="event-grid__item" data-id="{{this.id}}">
-    <div class="card">
-        <img class="card__img" src="{{ this.image}}" alt="" />
-        <h2 class="card__heading">{{this.name}}</h2>
-        <p class="card__date">{{this.date}}</p>
-        <p class="card_place">{{this.address}}</p>
+    <div class="card" data-id="{{this.id}}">
+        <img data-id="{{this.id}}" class="card__img" src="{{ this.image}}" alt="" />
+        <h2 data-id="{{this.id}}" class="card__heading">{{this.name}}</h2>
+        <p data-id="{{this.id}}" class="card__date">{{this.date}}</p>
+        <p data-id="{{this.id}}" class="card_place">{{this.address}}</p>
 
     </div>
 </li>

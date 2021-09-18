@@ -147,11 +147,7 @@ userCountry().then(response => {
                     pagination(res.data.page.totalPages);
 
 
-                    //времянка, потом убрать
-                    console.log(
-                        'oбъект для работы модалкой',
-                        res.data._embedded.events[11],
-                    );
+
                 });
             } else {
 
