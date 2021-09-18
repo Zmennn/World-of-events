@@ -15,5 +15,6 @@ export default function getRefs() {
     eventGrid: document.querySelector('.event-grid'),
     buyStandartTickets: document.querySelector('.btn-buy-standart'),
     buyVipTickets: document.querySelector('.btn-buy-vip'),
+    btnMoreAuthor: document.querySelector('.btn-more-from'),
   };
 }

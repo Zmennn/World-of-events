@@ -2,16 +2,15 @@ import './sass/main.scss';
 import { onErrorNotification } from './pnotify';
 import countrySearch from './js/country-search';
 import pagination from './js/pagination';
-
 import { fetchObj } from './fetch';
 import { userCountry } from './js/loadByLocation';
 import getRefs from './js/get-refs';
-
 import buyBtns from './js/buy-tickets-btns';
 const refs = getRefs();
 import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
 import { firstVisit } from './js/page-first-visit.js';
+import btnMoreAuthor from './js/btnMoreAuthor.js';
 
 firstVisit();
 
@@ -37,7 +36,7 @@ export const responseProcessing = {
 
   //обработчик инфы с сервера
   resHandler(res) {
-    console.log(res);
+
 
     //обработчик инфы с сервера по наличию данных
     if (res.data.page.totalPages < 1) {
@@ -61,7 +60,7 @@ export const responseProcessing = {
 
       preprocessingMarkup(res);
 
-      refs.eventGrid.scrollIntoView({ behavior: 'smooth' });
+      refs.linkInputSearchForm.scrollIntoView({ behavior: 'smooth' });
 
       this.allDataMarkup = res.data._embedded.events;
     }
@@ -70,17 +69,18 @@ export const responseProcessing = {
 
 //Обрабатываем события интерфейса
 export const eventProcessing = {
+
   //хранилище последнего запроса
   dataRequest: {},
 
   //метод запроса с очисткой
   standardRequest(data) {
-    console.log('start 1');
+
 
     //сохраним последний запрос
     this.dataRequest = {};
     this.dataRequest = data;
-    console.log(this.dataRequest, 'объект первого запроса');
+
 
     //разрешим очистку разметки
     responseProcessing.cleanPermission();
@@ -94,10 +94,9 @@ export const eventProcessing = {
 
   //метод запроса без очистки(пагинация)
   paginationRequest(data) {
-    //добавим данные o номере страницы в объект запроса
-    this.dataRequest.page = data;
 
-    // console.log(this.dataRequest, 'запрос канал пагинации');
+    //добавим данные o номере страницы в объект запроса
+    this.dataRequest.page = (data - 1);
 
     //запретим очистку разметки
     responseProcessing.cleanBan();
@@ -112,50 +111,49 @@ export const eventProcessing = {
 
 //обработка первой отрисовки
 userCountry().then(response => {
-    const data = response.data;
-    const country = data.country_code;
-    let firstRequest = { countryCode: country };
+  const data = response.data;
+  const country = data.country_code;
+  let firstRequest = { countryCode: country };
 
-    fetchObj
-        .creatingRequest(firstRequest)
-        .then(res => {
-            if (res.data.page.totalElements < 1) {
-                firstRequest = { countryCode: 'US', keyword: 'dance' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+  fetchObj
+    .creatingRequest(firstRequest)
+    .then(res => {
+      if (res.data.page.totalElements < 1) {
+        firstRequest = { countryCode: 'US', keyword: 'festival' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
-                //сохранение запроса 
-                eventProcessing.dataRequest = firstRequest;
+        //сохранение запроса 
+        eventProcessing.dataRequest = firstRequest;
 
-                fetchObj.creatingRequest(firstRequest).then(res => {
+        fetchObj.creatingRequest(firstRequest).then(res => {
 
-                    //команда на отрисовку
-                    preprocessingMarkup(res);
+          //команда на отрисовку
+          preprocessingMarkup(res);
 
-                    //сохранение отображенной базы данных
-                    responseProcessing.allDataMarkup = res.data._embedded.events;
+          //сохранение отображенной базы данных
+          responseProcessing.allDataMarkup = res.data._embedded.events;
 
-                    //заменим на вызов пагинашки
+          //заменим на вызов пагинашки
 
-                    //вызов пагинации
-                    pagination(res.data.page.totalPages);
-
-
-
-                });
-            } else {
-
-                //команда на отрисовку
-                preprocessingMarkup(res);
-
-                //сохранение запроса 
-                eventProcessing.dataRequest = firstRequest;
+          //вызов пагинации
+          pagination(res.data.page.totalPages);
 
 
-                //сохранение отображенной базы данных
-                responseProcessing.allDataMarkup = res.data._embedded.events;
+        });
+      } else {
+
+        //команда на отрисовку
+        preprocessingMarkup(res);
+
+        //сохранение запроса 
+        eventProcessing.dataRequest = firstRequest;
 
 
-                pagination(res.data.page.totalPages)
-            }
-        })
-        .catch(err => onErrorNotification(err));
+        //сохранение отображенной базы данных
+        responseProcessing.allDataMarkup = res.data._embedded.events;
+
+
+        pagination(res.data.page.totalPages)
+      }
+    })
+    .catch(err => onErrorNotification(err));
 });
