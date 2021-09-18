@@ -11,7 +11,7 @@ let array = [];
 let p = 1;
 
 
-export default function pagination(pages) { 
+export default function pagination(pages) {
     refs.output.removeEventListener('click', onClickShort);
     refs.output.removeEventListener('click', onClick);
     pages > 7 ? paginationLong(pages) : paginationShort(pages);
@@ -19,17 +19,17 @@ export default function pagination(pages) {
     const first = document.querySelector('.pagination__link');
     first.classList.add('pagination__item--current');
 
-    
+
 }
 
 function paginationShort(pages) {
     links = [];
     array = [1];
-   if (pages > 1) {
+    if (pages > 1) {
         for (let i = 0; i < pages; i++) {
-        array[i] = i + 1;
+            array[i] = i + 1;
+        }
     }
-   }
     refs.output.innerHTML = paginationTpl(array);
     refs.output.addEventListener('click', onClickShort);
 
@@ -95,7 +95,7 @@ function onClick(e) {
     if ((parseInt(currPage) > 4) && (parseInt(currPage) <= (parseInt(links[6].textContent) - 4))) {
         array = [1, '...', parseInt(currPage) - 1, currPage, parseInt(currPage) + 1, '...', parseInt(links[6].textContent)];
         longPaginationMarkup(array, links, currPage, prevPage);
-        console.log('current page:', currPage);
+
         eventProcessing.paginationRequest(currPage)
         return currPage;
     }
