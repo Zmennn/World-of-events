@@ -12,10 +12,14 @@ let p = 1;
 
 
 export default function pagination(pages) { 
+    refs.output.removeEventListener('click', onClickShort);
+    refs.output.removeEventListener('click', onClick);
     pages > 7 ? paginationLong(pages) : paginationShort(pages);
 
     const first = document.querySelector('.pagination__link');
     first.classList.add('pagination__item--current');
+
+    
 }
 
 function paginationShort(pages) {
