@@ -22,7 +22,12 @@ export function preprocessingMarkup(res) {
             image: currentImg,
         };
         eventsArr.push(cardObj);
+
+        //console.log(cardObj.id);
     }
 
     refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
+
 }
+
+
