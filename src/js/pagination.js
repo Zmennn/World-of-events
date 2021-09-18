@@ -8,9 +8,10 @@ let currPage = 1;
 let prevPage = 1;
 let links = [];
 let array = [];
+let p = 1;
 
 
-export default function pagination(pages) {
+export default function pagination(pages) { 
     pages > 7 ? paginationLong(pages) : paginationShort(pages);
 
     const first = document.querySelector('.pagination__link');
@@ -18,22 +19,27 @@ export default function pagination(pages) {
 }
 
 function paginationShort(pages) {
-    for (let i = 0; i < pages; i++) {
+    links = [];
+    array = [1];
+   if (pages > 1) {
+        for (let i = 0; i < pages; i++) {
         array[i] = i + 1;
     }
+   }
     refs.output.innerHTML = paginationTpl(array);
-    links = document.querySelectorAll('.pagination__link');
-    for (let i = 0; i < links.length; i++) {
-        links[i].addEventListener('click', onClickShort);
-    }
+    refs.output.addEventListener('click', onClickShort);
 
 }
 function onClickShort(e) {
     e.preventDefault();
+    if (!e.target.classList.contains('pagination__link')) {
+        return;
+    }
     const first = document.querySelector('.pagination__link');
     first.classList.remove('pagination__item--current');
     prevPage = currPage;
     currPage = e.target.textContent;
+    links = document.querySelectorAll('.pagination__link');
 
     for (let item of links) {
         if (item.textContent === prevPage) {
@@ -52,6 +58,7 @@ function onClickShort(e) {
 }
 
 function paginationLong(pages) {
+    links = [];
     array = [1, 2, 3, 4, 5, '...', pages];
     refs.output.innerHTML = paginationTpl(array);
     refs.output.addEventListener('click', onClick);
@@ -120,3 +127,4 @@ function longPaginationMarkup(array, links, currPage, prevPage) {
     }
 }
 
+//pagination(1);
