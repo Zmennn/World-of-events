@@ -1,11 +1,15 @@
 import getRefs from './get-refs';
 import eventsGrid from '../templates/events-grid.hbs';
+import {preprocessingMarkup} from './preprocessing-markup.js';
 
 const modalRefs = {
-    openModal: document.querySelector('.modal-container'),
-    picture: document.querySelector('.event-grid'),
-    closeModal: document.querySelector('.btn-close'),
-    overlay: document.querySelector('.js-overlay'),
+
+openModal: document.querySelector ('.modal-container'),    
+picture: document.querySelector ('.event-grid'),
+closeModal: document.querySelector('.btn-close'),
+overlay: document.querySelector('.js-overlay'),
+ID: document.querySelector('.event-grid__item'),
+
 }
 
 
@@ -37,6 +41,7 @@ function onOverlay(e) {
     modalRefs.overlay.classList.add('overlay');
 }
 
+
 window.addEventListener('keyup', modalCloseESC);
 modalRefs.overlay.addEventListener('click', onModalClose);
 
@@ -46,3 +51,13 @@ function modalCloseESC(e) {
     }
     onModalClose();
 }
+
+function onOverlay (e) {
+modalRefs.overlay.classList.add('overlay'); 
+}
+
+
+  console.log ("ID для модалки: ", modalRefs.ID.getAttribute('data-id'));
+
+
+

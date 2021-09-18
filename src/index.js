@@ -9,11 +9,12 @@ import getRefs from './js/get-refs';
 
 import buyBtns from './js/buy-tickets-btns'
 const refs = getRefs();
-
+import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
 
 
 import { preprocessingMarkup } from './js/preprocessing-markup.js'
+
 
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
