@@ -1,6 +1,7 @@
 import getRefs from './get-refs';
 import eventsGrid from '../templates/events-grid.hbs';
 import { preprocessingMarkup } from './preprocessing-markup.js';
+import { responseProcessing } from '../index';
 
 const modalRefs = {
 
@@ -27,6 +28,14 @@ function onModalOpen(e) {
     ) {
         return
     }
+
+    //доступ к данным модалки
+
+    const dataFromModal = responseProcessing.allDataMarkup.filter(
+        el => el.id === e.target.dataset.id)[0];
+    console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
+
+
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
 }
@@ -57,7 +66,7 @@ function onOverlay(e) {
 }
 
 
-//   console.log ("ID для модалки: ", modalRefs.ID.getAttribute('data-id'));
+
 
 
 
