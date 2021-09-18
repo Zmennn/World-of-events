@@ -1,13 +1,16 @@
 export default function getRefs() {
   return {
-    // linkInputCountry: document.querySelector('.search-country'),
-    // linkInputValue: document.querySelector('.search-input-country'),
+    linkInputSearchForm: document.querySelector('.search-event'),
+    linkInputSearch: document.querySelector('.search-input-event'),
+    linkInputSearchBtn: document.querySelector('.search-button__icon'),
     linkInputEvent: document.querySelector('.search-event'),
     linkDropdownBtn: document.querySelector('.drop-btn'),
     linkDropdownContent: document.querySelector('.dropdown-content'),
     linkDropdownList: document.querySelector('.dropdown-list'),
     linkDropdownInput: document.querySelector('#myInput'),
     linkDropdownIcon: document.querySelector('.drop-button__icon'),
+    linkDropdownInputRes: document.querySelector('.name-list'),
+    linkDropdownInputItem: document.querySelector('.name-item'),
 
     eventGrid: document.querySelector('.event-grid'),
     buyStandartTickets: document.querySelector('.btn-buy-standart'),

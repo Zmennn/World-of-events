@@ -1,10 +1,12 @@
 import { eventProcessing } from '../index';
 import getRefs from './get-refs';
 import countryCodes from '../country-codes.json';
+
 const refs = getRefs();
 const newArray = [];
+
 refs.linkDropdownBtn.addEventListener('click', showCountryDropdownForm);
-refs.linkDropdownInput.addEventListener('input', filterCountryDropdownList);
+refs.linkDropdownInput.addEventListener('input', inputValueCountryDropdownList);
 refs.linkDropdownIcon.addEventListener('click', showCountryDropdownForm);
 
 function showCountryDropdownForm(e) {
@@ -12,7 +14,12 @@ function showCountryDropdownForm(e) {
   refs.linkDropdownList.innerHTML = showCountryList(countryCodes);
   refs.linkDropdownBtn.textContent = 'Choose country';
   document.getElementById('myInput').value = '';
+  refs.linkDropdownInput.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+  });
 }
+
 function showCountryList(countryCodesArray) {
   return countryCodesArray
     .map(item => {
@@ -24,6 +31,7 @@ function showCountryList(countryCodesArray) {
     })
     .join('');
 }
+
 function showCountryName(array) {
   return array
     .map(elem => {
@@ -35,22 +43,24 @@ function showCountryName(array) {
     })
     .join('');
 }
-function filterCountryDropdownList(e) {
-  let input, filter, a, i, list;
-  input = refs.linkDropdownInput;
-  filter = input.value.toUpperCase();
-  a = document.querySelectorAll('.name-item');
-  list = document.querySelectorAll('.name-list');
-  for (i = 0; i < a.length; i++) {
-    const txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.split('')[0] === filter) {
-      newArray.push(txtValue);
+
+function inputValueCountryDropdownList(e) {
+  let inputValue, i;
+  newArray.splice(0, 10);
+  inputValue = refs.linkDropdownInput.value;
+  const newInputValue =
+    inputValue.substring(0, 1).toUpperCase() + inputValue.substring(1);
+  for (i = 0; i < countryCodes.length; i++) {
+    const nameCountry = countryCodes[i].name;
+    if (nameCountry.slice(0, inputValue.length) === newInputValue) {
+      newArray.push(nameCountry);
       refs.linkDropdownList.innerHTML = showCountryName(newArray);
-    } else if (input.value === '') {
+    } else if (inputValue === '') {
       refs.linkDropdownList.innerHTML = showCountryList(countryCodes);
     }
   }
 }
+
 refs.linkDropdownList.addEventListener('click', showCountryEventInfo);
 
 // Возвращается Сountry Code - element.code//
@@ -65,6 +75,7 @@ function showCountryEventInfo(e) {
     }
   });
 }
+
 const headerZoneItem = document.querySelector('.header__item');
 const headerZoneInput = document.querySelector('.container');
 const headerZone = document.querySelector('.header');
@@ -72,10 +83,23 @@ headerZone.addEventListener('click', onBackdropClose);
 headerZoneItem.addEventListener('click', onBackdropClose);
 headerZoneInput.addEventListener('click', onBackdropClose);
 document.addEventListener('click', onBackdropClose);
+
 function onBackdropClose(e) {
   if (e.currentTarget === e.target) {
     refs.linkDropdownContent.classList.remove('show');
     refs.linkDropdownBtn.textContent = 'Choose country';
     document.getElementById('myInput').value = '';
+  }
+}
+
+refs.linkInputSearchForm.addEventListener('submit', onInputChange);
+refs.linkInputSearchBtn.addEventListener('click', onInputChange);
+
+// Возвращается значение - input //
+function onInputChange(e) {
+  e.preventDefault();
+  const input = refs.linkInputSearch.value;
+  if (input !== '') {
+    console.log(input);
   }
 }

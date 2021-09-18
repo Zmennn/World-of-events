@@ -51,14 +51,14 @@ input[id='myInput']::placeholder {
 
 .search-button__icon {
   position: relative;
-  right: 40px;
+  right: 35px;
   top: 15px;
   fill: var(--input-placeholder-footer);
   cursor: pointer;
 }
 .drop-button__icon {
   position: relative;
-  right: 45px;
+  right: 35px;
   fill: var(--input-placeholder-footer);
   cursor: pointer;
 }
@@ -75,6 +75,7 @@ input[id='myInput']::placeholder {
   backdrop-filter: blur(20px);
   border-radius: 20px;
   padding-left: 30px;
+  padding-right: 0px;
   font-family: var(--main-font);
   font-style: normal;
   font-weight: normal;
