@@ -13,105 +13,107 @@ import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
 
 
+import { preprocessingMarkup } from './js/preprocessing-markup.js'
+
+
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
 
 //обработка ответа сервера
 export const responseProcessing = {
-  //накопитель объектов отрисованной разметки
-  allDataMarkup: [],
+    //накопитель объектов отрисованной разметки
+    allDataMarkup: [],
 
-  //ключ разрешения очистки
-  cleaningPermission: false,
+    //ключ разрешения очистки
+    cleaningPermission: false,
 
-  //метод разрешения очистки
-  cleanPermission() {
-    this.cleaningPermission = true;
-  },
+    //метод разрешения очистки
+    cleanPermission() {
+        this.cleaningPermission = true;
+    },
 
-  //метод запрещения очистки
-  cleanBan() {
-    this.cleaningPermission = false;
-  },
+    //метод запрещения очистки
+    cleanBan() {
+        this.cleaningPermission = false;
+    },
 
-  //обработчик инфы с сервера
-  resHandler(res) {
-    console.log(res);
+    //обработчик инфы с сервера
+    resHandler(res) {
+        console.log(res);
 
-    //обработчик инфы с сервера по наличию данных
-    if (res.data.page.totalPages < 1) {
-      throw 'No information for this request';
-    }
+        //обработчик инфы с сервера по наличию данных
+        if (res.data.page.totalPages < 1) {
+            throw 'No information for this request';
+        }
 
-    if (this.cleaningPermission) {
+        if (this.cleaningPermission) {
 
-      //забиваем карточки в акум
-      this.allDataMarkup = res.data._embedded.events;
+            //забиваем карточки в акум
+            this.allDataMarkup = res.data._embedded.events;
 
 
-      //команда на отрисовку грида
-      preprocessingMarkup(res);
+            //команда на отрисовку грида
+            preprocessingMarkup(res);
 
-      // console.log(
-      //   'всего страниц отправим в пагинашку',
-      //   res.data.page.totalPages,
-      // );
-      pagination(res.data.page.totalPages);
-    } else {
-      //отрисовка без перерисовки пагинации
+            // console.log(
+            //   'всего страниц отправим в пагинашку',
+            //   res.data.page.totalPages,
+            // );
+            pagination(res.data.page.totalPages);
+        } else {
+            //отрисовка без перерисовки пагинации
 
-      preprocessingMarkup(res);
+            preprocessingMarkup(res);
 
-      refs.eventGrid.scrollIntoView({ behavior: "smooth" });
+            refs.eventGrid.scrollIntoView({ behavior: "smooth" });
 
-      this.allDataMarkup = res.data._embedded.events;
-      ;
-    }
-  },
+            this.allDataMarkup = res.data._embedded.events;;
+        }
+    },
 };
 
 //Обрабатываем события интерфейса
 export const eventProcessing = {
-  //хранилище последнего запроса
-  dataRequest: {},
+    //хранилище последнего запроса
+    dataRequest: {},
 
-  //метод запроса с очисткой
-  standardRequest(data) {
-    console.log('start 1');
+    //метод запроса с очисткой
+    standardRequest(data) {
+        console.log('start 1');
 
-    //сохраним последний запрос
-    this.dataRequest = {};
-    this.dataRequest = data;
-    console.log(this.dataRequest, 'объект первого запроса');
+        //сохраним последний запрос
+        this.dataRequest = {};
+        this.dataRequest = data;
+        console.log(this.dataRequest, 'объект первого запроса');
 
-    //разрешим очистку разметки
-    responseProcessing.cleanPermission();
+        //разрешим очистку разметки
+        responseProcessing.cleanPermission();
 
-    //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
-    fetchObj
-      .creatingRequest(this.dataRequest)
-      .then(res => responseProcessing.resHandler(res))
-      .catch(err => onErrorNotification(err));
-  },
+        //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
+        fetchObj
+            .creatingRequest(this.dataRequest)
+            .then(res => responseProcessing.resHandler(res))
+            .catch(err => onErrorNotification(err));
+    },
 
-  //метод запроса без очистки(пагинация)
-  paginationRequest(data) {
+    //метод запроса без очистки(пагинация)
+    paginationRequest(data) {
 
-    //добавим данные o номере страницы в объект запроса
-    this.dataRequest.page = data;
+        //добавим данные o номере страницы в объект запроса
+        this.dataRequest.page = data;
 
-    // console.log(this.dataRequest, 'запрос канал пагинации');
+        // console.log(this.dataRequest, 'запрос канал пагинации');
 
-    //запретим очистку разметки
-    responseProcessing.cleanBan();
+        //запретим очистку разметки
+        responseProcessing.cleanBan();
 
-    //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
-    fetchObj
-      .creatingRequest(this.dataRequest)
-      .then(res => responseProcessing.resHandler(res))
-      .catch(err => onErrorNotification(err));
-  },
+        //отдадим запрос на модуль обращения к серв, вернем промис и отправим в блок обработки
+        fetchObj
+            .creatingRequest(this.dataRequest)
+            .then(res => responseProcessing.resHandler(res))
+            .catch(err => onErrorNotification(err));
+    },
 };
 
 
@@ -119,54 +121,54 @@ export const eventProcessing = {
 
 //обработка первой отрисовки
 userCountry().then(response => {
-  const data = response.data;
-  const country = data.country_code;
-  let firstRequest = { countryCode: country };
+    const data = response.data;
+    const country = data.country_code;
+    let firstRequest = { countryCode: country };
 
-  fetchObj
-    .creatingRequest(firstRequest)
-    .then(res => {
-      if (res.data.page.totalElements < 1) {
-        firstRequest = { countryCode: 'US', keyword: 'dance' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+    fetchObj
+        .creatingRequest(firstRequest)
+        .then(res => {
+            if (res.data.page.totalElements < 1) {
+                firstRequest = { countryCode: 'US', keyword: 'dance' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
-        //сохранение запроса 
-        eventProcessing.dataRequest = firstRequest;
+                //сохранение запроса 
+                eventProcessing.dataRequest = firstRequest;
 
-        fetchObj.creatingRequest(firstRequest).then(res => {
+                fetchObj.creatingRequest(firstRequest).then(res => {
 
-          //команда на отрисовку
-          preprocessingMarkup(res);
+                    //команда на отрисовку
+                    preprocessingMarkup(res);
 
-          //сохранение отображенной базы данных
-          responseProcessing.allDataMarkup = res.data._embedded.events;
+                    //сохранение отображенной базы данных
+                    responseProcessing.allDataMarkup = res.data._embedded.events;
 
-          //заменим на вызов пагинашки
+                    //заменим на вызов пагинашки
 
-          //вызов пагинации
-          pagination(res.data.page.totalPages);
-
-
-          //времянка, потом убрать
-          console.log(
-            'oбъект для работы модалкой',
-            res.data._embedded.events[11],
-          );
-        });
-      } else {
-
-        //команда на отрисовку
-        preprocessingMarkup(res);
-
-        //сохранение запроса 
-        eventProcessing.dataRequest = firstRequest;
+                    //вызов пагинации
+                    pagination(res.data.page.totalPages);
 
 
-        //сохранение отображенной базы данных
-        responseProcessing.allDataMarkup = res.data._embedded.events;
+                    //времянка, потом убрать
+                    console.log(
+                        'oбъект для работы модалкой',
+                        res.data._embedded.events[11],
+                    );
+                });
+            } else {
+
+                //команда на отрисовку
+                preprocessingMarkup(res);
+
+                //сохранение запроса 
+                eventProcessing.dataRequest = firstRequest;
 
 
-        pagination(res.data.page.totalPages)
-      }
-    })
-    .catch(err => onErrorNotification(err));
+                //сохранение отображенной базы данных
+                responseProcessing.allDataMarkup = res.data._embedded.events;
+
+
+                pagination(res.data.page.totalPages)
+            }
+        })
+        .catch(err => onErrorNotification(err));
 });
