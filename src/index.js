@@ -112,49 +112,50 @@ export const eventProcessing = {
 
 //обработка первой отрисовки
 userCountry().then(response => {
-  const data = response.data;
-  const country = data.country_code;
-  let firstRequest = { countryCode: country };
+    const data = response.data;
+    const country = data.country_code;
+    let firstRequest = { countryCode: country };
 
-  fetchObj
-    .creatingRequest(firstRequest)
-    .then(res => {
-      if (res.data.page.totalElements < 1) {
-        firstRequest = { countryCode: 'US', keyword: 'dance' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+    fetchObj
+        .creatingRequest(firstRequest)
+        .then(res => {
+            if (res.data.page.totalElements < 1) {
+                firstRequest = { countryCode: 'US', keyword: 'dance' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
-        //сохранение запроса
-        eventProcessing.dataRequest = firstRequest;
+                //сохранение запроса 
+                eventProcessing.dataRequest = firstRequest;
 
-        fetchObj.creatingRequest(firstRequest).then(res => {
-          //команда на отрисовку
-          preprocessingMarkup(res);
+                fetchObj.creatingRequest(firstRequest).then(res => {
 
-          //сохранение отображенной базы данных
-          responseProcessing.allDataMarkup = res.data._embedded.events;
+                    //команда на отрисовку
+                    preprocessingMarkup(res);
 
-          //заменим на вызов пагинашки
+                    //сохранение отображенной базы данных
+                    responseProcessing.allDataMarkup = res.data._embedded.events;
 
-          //вызов пагинации
-          pagination(res.data.page.totalPages);
+                    //заменим на вызов пагинашки
 
-          //времянка, потом убрать
-          console.log(
-            'oбъект для работы модалкой',
-            res.data._embedded.events[11],
-          );
-        });
-      } else {
-        //команда на отрисовку
-        preprocessingMarkup(res);
+                    //вызов пагинации
+                    pagination(res.data.page.totalPages);
 
-        //сохранение запроса
-        eventProcessing.dataRequest = firstRequest;
 
-        //сохранение отображенной базы данных
-        responseProcessing.allDataMarkup = res.data._embedded.events;
 
-        pagination(res.data.page.totalPages);
-      }
-    })
-    .catch(err => onErrorNotification(err));
+                });
+            } else {
+
+                //команда на отрисовку
+                preprocessingMarkup(res);
+
+                //сохранение запроса 
+                eventProcessing.dataRequest = firstRequest;
+
+
+                //сохранение отображенной базы данных
+                responseProcessing.allDataMarkup = res.data._embedded.events;
+
+
+                pagination(res.data.page.totalPages)
+            }
+        })
+        .catch(err => onErrorNotification(err));
 });
