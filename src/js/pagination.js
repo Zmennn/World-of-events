@@ -87,7 +87,7 @@ function onClick(e) {
     if (parseInt(currPage) <= 4) {
         array = [1, 2, 3, 4, 5, '...', parseInt(links[6].textContent)];
         longPaginationMarkup(array, links, currPage, prevPage);
-        console.log('current page:', currPage);
+
         eventProcessing.paginationRequest(currPage)
         return currPage;
     }
@@ -104,7 +104,7 @@ function onClick(e) {
         array = [1, '...', parseInt(links[6].textContent) - 4, parseInt(links[6].textContent) - 3,
             parseInt(links[6].textContent) - 2, parseInt(links[6].textContent) - 1, parseInt(links[6].textContent)];
         longPaginationMarkup(array, links, currPage, prevPage);
-        console.log('current page:', currPage);
+
         eventProcessing.paginationRequest(currPage)
         return currPage;
     }
