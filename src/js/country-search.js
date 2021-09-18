@@ -4,6 +4,8 @@ import countryCodes from '../country-codes.json';
 
 const refs = getRefs();
 const newArray = [];
+let countryCodeValue = '';
+let requestInputValue = '';
 
 refs.linkDropdownBtn.addEventListener('click', showCountryDropdownForm);
 refs.linkDropdownInput.addEventListener('input', inputValueCountryDropdownList);
@@ -69,7 +71,8 @@ function showCountryEventInfo(e) {
   countryCodes.forEach(element => {
     if (element.name === e.target.textContent) {
       refs.linkDropdownContent.classList.remove('show');
-      console.log(element.code);
+      countryCodeValue = element.code;
+      requestCodeInfo(requestInputValue, countryCodeValue);
 
       eventProcessing.standardRequest({ countryCode: element.code });
     }
@@ -99,7 +102,12 @@ refs.linkInputSearchBtn.addEventListener('click', onInputChange);
 function onInputChange(e) {
   e.preventDefault();
   const input = refs.linkInputSearch.value;
-  if (input !== '') {
-    console.log(input);
-  }
+
+  requestInputValue = input;
+  requestCodeInfo(requestInputValue, countryCodeValue);
+}
+
+// Возвращается значения - input + code//
+function requestCodeInfo() {
+  console.log(requestInputValue, countryCodeValue);
 }
