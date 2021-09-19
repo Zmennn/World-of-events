@@ -34,7 +34,7 @@ form {
 /* поиск в выпадающем списке*/
 input[id='myInput'] {
   padding-left: 10px;
-  background-color: rgb(75, 73, 73);
+  background-color: #504e4e;
   width: 210px;
   height: 30px;
   color: hsl(0, 4%, 70%);
@@ -46,19 +46,19 @@ input[id='myInput'] {
   text-align: start;
 }
 input[id='myInput']::placeholder {
-  color: hsl(0, 4%, 70%);
+  color: var(--input-placeholder-footer);
 }
 
 .search-button__icon {
   position: relative;
-  right: 35px;
+  right: 38px;
   top: 15px;
   fill: var(--input-placeholder-footer);
   cursor: pointer;
 }
 .drop-button__icon {
   position: relative;
-  right: 35px;
+  right: 38px;
   fill: var(--input-placeholder-footer);
   cursor: pointer;
 }
@@ -70,6 +70,7 @@ input[id='myInput']::placeholder {
   height: 40px;
   color: var(--input-placeholder-footer);
   border: none;
+  border-radius: 3px;
   cursor: pointer;
   background: var(--input-bgr-color);
   backdrop-filter: blur(20px);

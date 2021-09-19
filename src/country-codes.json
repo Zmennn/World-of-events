@@ -1,6 +1,4 @@
 [
-  { "code": "US", "name": "United States Of America" },
-
   { "code": "AD", "name": "Andorra" },
 
   { "code": "AR", "name": "Argentina" },
@@ -160,6 +158,8 @@
   { "code": "UA", "name": "Ukraine" },
 
   { "code": "AE", "name": "United Arab Emirates" },
+
+  { "code": "US", "name": "United States Of America" },
 
   { "code": "UY", "name": "Uruguay" },
 

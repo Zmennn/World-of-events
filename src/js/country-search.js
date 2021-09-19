@@ -48,7 +48,7 @@ function showCountryName(array) {
 
 function inputValueCountryDropdownList(e) {
   let inputValue, i;
-  newArray.splice(0, 10);
+  newArray.splice(0, 100);
   inputValue = refs.linkDropdownInput.value;
   const newInputValue =
     inputValue.substring(0, 1).toUpperCase() + inputValue.substring(1);
@@ -92,6 +92,7 @@ function onBackdropClose(e) {
     refs.linkDropdownContent.classList.remove('show');
     refs.linkDropdownBtn.textContent = 'Choose country';
     document.getElementById('myInput').value = '';
+    refs.linkInputSearch.value = '';
   }
 }
 
