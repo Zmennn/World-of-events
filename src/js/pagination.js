@@ -8,7 +8,6 @@ let currPage = 1;
 let prevPage = 1;
 let links = [];
 let array = [];
-let p = 1;
 
 
 export default function pagination(pages) {
@@ -19,13 +18,12 @@ export default function pagination(pages) {
     const first = document.querySelector('.pagination__link');
     first.classList.add('pagination__item--current');
 
-
 }
 
 function paginationShort(pages) {
     links = [];
-    array = [1];
-    if (pages > 1) {
+    array = [];
+    if (pages > 0) {
         for (let i = 0; i < pages; i++) {
             array[i] = i + 1;
         }
@@ -130,5 +128,3 @@ function longPaginationMarkup(array, links, currPage, prevPage) {
         }
     }
 }
-
-//pagination(1);
