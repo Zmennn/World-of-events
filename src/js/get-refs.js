@@ -11,7 +11,7 @@ export default function getRefs() {
     linkDropdownIcon: document.querySelector('.drop-button__icon'),
     linkDropdownInputRes: document.querySelector('.name-list'),
     linkDropdownInputItem: document.querySelector('.name-item'),
-
+    notificationCont: document.querySelector('.notification'),
     eventGrid: document.querySelector('.event-grid'),
     buyStandartTickets: document.querySelector('.btn-buy-standart'),
     buyVipTickets: document.querySelector('.btn-buy-vip'),
