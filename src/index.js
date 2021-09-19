@@ -9,11 +9,8 @@ import buyBtns from './js/buy-tickets-btns';
 const refs = getRefs();
 import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
-import { firstVisit } from './js/page-first-visit.js';
 import btnMoreAuthor from './js/btnMoreAuthor.js';
 import notification from './js/customNotification.js';
-
-firstVisit();
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
