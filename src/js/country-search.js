@@ -4,8 +4,8 @@ import countryCodes from '../country-codes.json';
 
 const refs = getRefs();
 const newArray = [];
-let countryCodeValue = 'null';
-let requestInputValue = 'null';
+let countryCodeValue = '';
+let requestInputValue = '';
 
 refs.linkDropdownBtn.addEventListener('click', showCountryDropdownForm);
 refs.linkDropdownInput.addEventListener('input', inputValueCountryDropdownList);
@@ -67,6 +67,7 @@ refs.linkDropdownList.addEventListener('click', showCountryEventInfo);
 
 // Возвращается Сountry Code - element.code//
 function showCountryEventInfo(e) {
+  countryCodeValue = '';
   refs.linkDropdownBtn.textContent = e.target.textContent;
   countryCodes.forEach(element => {
     if (element.name === e.target.textContent) {
@@ -101,6 +102,7 @@ refs.linkInputSearchBtn.addEventListener('click', onInputChange);
 
 // Возвращается значение - input //
 function onInputChange(e) {
+  requestInputValue = '';
   e.preventDefault();
   const input = refs.linkInputSearch.value;
 
@@ -111,7 +113,4 @@ function onInputChange(e) {
 // Возвращается значения - input + code//
 function requestCodeInfo() {
   console.log(requestInputValue, countryCodeValue);
-
-  console.log(typeof requestInputValue);
-  console.log(typeof countryCodeValue);
 }
