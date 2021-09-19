@@ -12,6 +12,10 @@ refs.linkDropdownInput.addEventListener('input', inputValueCountryDropdownList);
 refs.linkDropdownIcon.addEventListener('click', showCountryDropdownForm);
 
 function showCountryDropdownForm(e) {
+  countryCodeValue = '';
+  if (refs.linkInputSearch.value === '') {
+    requestInputValue = '';
+  }
   document.getElementById('myDropdown').classList.toggle('show');
   refs.linkDropdownList.innerHTML = showCountryList(countryCodes);
   refs.linkDropdownBtn.textContent = 'Choose country';
@@ -102,10 +106,8 @@ refs.linkInputSearchBtn.addEventListener('click', onInputChange);
 
 // Возвращается значение - input //
 function onInputChange(e) {
-  requestInputValue = '';
   e.preventDefault();
   const input = refs.linkInputSearch.value;
-
   requestInputValue = input;
   requestCodeInfo(requestInputValue, countryCodeValue);
 }
