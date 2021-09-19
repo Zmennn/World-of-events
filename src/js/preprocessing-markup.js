@@ -13,14 +13,18 @@ export function preprocessingMarkup(res) {
       }
     }
     const cardObj = {
-      id: event.id,
-      name: event.name,
-      date: event.dates.start.localDate,
-      address: event._embedded.venues[0].name,
+      id: event.id ? event.id : 'No data',
+      name: event.name ? event.name : 'No data',
+      date: event.dates.start.localDate
+        ? event.dates.start.localDate
+        : 'No data',
+      address: event._embedded.venues[0].name
+        ? event._embedded.venues[0].name
+        : event._embedded.venues[0].address.line1,
       image: currentImg,
     };
     eventsArr.push(cardObj);
   }
-  refs.notificationCont.innerHTML = ""
+  refs.notificationCont.innerHTML = '';
   refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
 }
