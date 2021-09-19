@@ -67,6 +67,7 @@ refs.linkDropdownList.addEventListener('click', showCountryEventInfo);
 
 // Возвращается Сountry Code - element.code//
 function showCountryEventInfo(e) {
+  countryCodeValue = '';
   refs.linkDropdownBtn.textContent = e.target.textContent;
   countryCodes.forEach(element => {
     if (element.name === e.target.textContent) {
@@ -101,6 +102,7 @@ refs.linkInputSearchBtn.addEventListener('click', onInputChange);
 
 // Возвращается значение - input //
 function onInputChange(e) {
+  requestInputValue = '';
   e.preventDefault();
   const input = refs.linkInputSearch.value;
 
