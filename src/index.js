@@ -11,11 +11,7 @@ import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
 import btnMoreAuthor from './js/btnMoreAuthor.js';
 import notification from './js/customNotification.js';
-
 import 'animate.css';
-
-firstVisit();
-
 
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
@@ -124,7 +120,6 @@ userCountry().then(response => {
           //команда на отрисовку
           preprocessingMarkup(res);
 
-
           const eventsItems = document.querySelectorAll('.event-grid__item');
           console.log(eventsItems, ' if ');
           for (const item of eventsItems) {
@@ -140,7 +135,6 @@ userCountry().then(response => {
       } else {
         //команда на отрисовку
         preprocessingMarkup(res);
-
 
         const eventsItems = document.querySelectorAll('.event-grid__item');
         for (const item of eventsItems) {
