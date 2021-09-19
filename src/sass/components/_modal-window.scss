@@ -8,7 +8,10 @@
     margin: auto;
     background-color: var(--modal-background-color);
     border-radius: 300px 0px;
-    position:relative;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .round-picture img {
@@ -67,8 +70,32 @@
     height: 25px;
 }
 .ticket-icon {
-    margin-left: 13px;
+    float: left;
+    margin-right: 13px;
+    margin-top: 2px;
+    width: 29px;
+    height: 19px;
 }
+.price-type-standart,
+.price-type-standart {
+    text-transform: capitalize;
+}
+.price-min-standart::after,
+.price-min-vip::after
+ {
+  content: "-";
+}
+.modal-item-text-price,
+.modal-item-text {
+    font-family: Montserrat;
+    font-weight: normal;
+}
+
+// .price::before {
+//   content: url(../images/sprite.svg#icon-ticket);
+//   background-image: url(../images/sprite.svg#icon-ticket); 
+// }
+
 
 ///// ******** Исправить кнопку закрытия /////
 // .btn-close {
@@ -91,6 +118,9 @@
     .modal-image img {
         max-width: 360px;
         max-height: 641px;
+    }
+    .modal-content {
+        height: 641px;
     }
     .modal-main-info {
         max-width: 450px;
@@ -128,7 +158,7 @@
         line-height: 20px;
         width: 255px;
         height: 40px;
-        margin: 21px, auto, 32px, auto;
+        margin: 21px auto 32px auto;
     }
 }
 
@@ -139,13 +169,16 @@
         width: 595px;
     }
     .round-picture img {
-        margin: 28px, auto, 43px, auto;
+        margin: 28px auto 43px auto;
         max-width: 70px;
         max-height: 70px;
     }
     .modal-image img {
         max-width: 233px;
         max-height: 416px;
+    }
+    .modal-content {
+        height: 546px;
     }
     .modal-main-info {
         max-width: 265px;
@@ -183,7 +216,11 @@
         line-height: 20px;
         width: 255px;
         height: 40px;
-        margin: 20px, auto, 56px, auto;
+        margin: 43px auto 56px auto;
+    }
+    .ticket-icon {
+        width:24px;
+        height:16px;
     }
 }
 
@@ -195,7 +232,7 @@
         border-radius: 150px 0px;
     }
     .round-picture img {
-        margin: 72px, auto, 18px, auto;
+        margin: 72px auto 18px auto;
         max-width: 102px;
         max-height: 102px;
     }
@@ -239,7 +276,11 @@
         line-height: 20px;
         width: 255px;
         height: 40px;
-        margin: 10px, auto, 104px, auto;
+        margin: 25px auto 104px auto;
+    }
+    .ticket-icon {
+        width:24px;
+        height:16px;
     }
 }
 
