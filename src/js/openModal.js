@@ -1,3 +1,4 @@
+import '../sass/main.scss';
 import getRefs from './get-refs';
 import eventsGrid from '../templates/events-grid.hbs';
 import { preprocessingMarkup } from './preprocessing-markup.js';
@@ -5,7 +6,7 @@ import { responseProcessing } from '../index';
 
 const modalRefs = {
 
-    openModal: document.querySelector('.modal-container'),
+    openModal: document.querySelector('.modal-window'),
     picture: document.querySelector('.event-grid'),
     closeModal: document.querySelector('.btn-close'),
     overlay: document.querySelector('.js-overlay'),
@@ -16,6 +17,9 @@ const modalRefs = {
 
 modalRefs.picture.addEventListener('click', onModalOpen);
 modalRefs.closeModal.addEventListener('click', onModalClose);
+window.addEventListener('keyup', modalCloseESC);
+modalRefs.overlay.addEventListener('click', onModalClose);
+
 
 function onModalOpen(e) {
     e.preventDefault();
@@ -38,34 +42,31 @@ function onModalOpen(e) {
 
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
+    modalRefs.openModal.classList.remove('visually-hidden');
+     
 }
 
 function onModalClose(e) {
-    modalRefs.overlay.classList.remove('overlay');
-    modalRefs.openModal.classList.remove('open-modal');
+    if (!e.currentTarget.classList.contains('btn-close')) {
+        return;
+    }
 
+    modalRefs.overlay.classList.remove('overlay');
+    modalRefs.openModal.classList.add('visually-hidden');
 }
 
 function onOverlay(e) {
     modalRefs.overlay.classList.add('overlay');
 }
 
-
-window.addEventListener('keyup', modalCloseESC);
-modalRefs.overlay.addEventListener('click', onModalClose);
 
 function modalCloseESC(e) {
     if (e.key !== 'Escape') {
         return;
     }
-    onModalClose();
+    modalRefs.overlay.classList.remove('overlay');
+    modalRefs.openModal.classList.add('visually-hidden');
 }
-
-function onOverlay(e) {
-    modalRefs.overlay.classList.add('overlay');
-}
-
-
 
 
 
