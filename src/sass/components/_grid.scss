@@ -57,4 +57,11 @@
     animation-duration: 1.5s;
     // animation-delay: 250ms;
   }
+
+  &:hover,
+  &:focus {
+  transform: scale(1.2);
+  transition: 500ms;
 }
+}
+
