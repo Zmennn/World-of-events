@@ -11,7 +11,23 @@ const modalRefs = {
     closeModal: document.querySelector('.btn-close'),
     overlay: document.querySelector('.js-overlay'),
     ID: document.querySelector('.event-grid__item'),
+    name: document.querySelector('.modal-item-text-who'),
+    info: document.querySelector('.modal-item-text-info'),
+    date: document.querySelector('.modal-item-text-when'),
+    where: document.querySelector('.modal-item-text-where'),
+    priceTypeStand: document.querySelector('.price-type-standart'),
+    priceMinStand: document.querySelector('.price-min-standart'),
+    priceMaxStand: document.querySelector('.price-max-standart'),
+    priceCurStand: document.querySelector('.price-currency-standart'),
 
+    priceTypeVip: document.querySelector('.price-type-vip'),
+    priceMinSVip: document.querySelector('.price-min-vip'),
+    priceMaxVip: document.querySelector('.price-max-vip'),
+    priceCurVip: document.querySelector('.price-currency-vip'),
+
+    imageRound: document.querySelector('.modal-img-round'),
+    image: document.querySelector('.modal-img'),
+    
 }
 
 
@@ -42,8 +58,26 @@ function onModalOpen(e) {
 
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
+
+    modalRefs.imageRound.src = dataFromModal?.images?.length && dataFromModal.images[5] && dataFromModal.images[5].url || ' ';
+    modalRefs.image.src = dataFromModal?.images?.length && dataFromModal.images[5] && dataFromModal.images[5].url || ' ';
+    modalRefs.name.innerHTML = ('beforeend', dataFromModal?.name.length && dataFromModal?.name || ' ');
+    modalRefs.info.innerHTML = ('beforeend', dataFromModal?.promoter?.description.length && dataFromModal?.promoter?.description || ' ');
+    modalRefs.date.innerHTML = ('beforeend', dataFromModal?.dates.start?.localDate.length && dataFromModal?.dates.start?.localDate || ' ');
+    modalRefs.where.innerHTML = ('beforeend', dataFromModal?._embedded?.venues[0]?.name.length && dataFromModal?._embedded?.venues[0]?.name || ' ');
+    modalRefs.priceTypeStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.type.length && dataFromModal?.priceRanges[0]?.type || ' ');
+    modalRefs.priceMinStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.min.length && dataFromModal.priceRanges[0]?.min || ' ');
+    modalRefs.priceMaxStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.max.length && dataFromModal.priceRanges[0]?.max || ' ');
+    modalRefs.priceCurStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.currency.length && dataFromModal.priceRanges[0]?.currency || ' ');
+    modalRefs.priceTypeVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.length && dataFromModal.priceRanges[1]?.type || ' ');
+    modalRefs.priceMinVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.min.length && dataFromModal.priceRanges[1]?.min || ' ');
+    modalRefs.priceMaxVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.max.length && dataFromModal.priceRanges[1]?.max || ' ');
+    modalRefs.priceCurVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.currency.length && dataFromModal?.priceRanges[1]?.currency || ' ');
+    
+
     modalRefs.openModal.classList.remove('visually-hidden');
      
+
 }
 
 function onModalClose(e) {
