@@ -79,7 +79,7 @@ function showCountryEventInfo(e) {
       countryCodeValue = element.code;
       requestCodeInfo(requestInputValue, countryCodeValue);
 
-      eventProcessing.standardRequest({ countryCode: element.code });
+
     }
   });
 }
@@ -114,5 +114,15 @@ function onInputChange(e) {
 
 // Возвращается значения - input + code//
 function requestCodeInfo() {
-  console.log(requestInputValue, countryCodeValue);
+  const data = [requestInputValue, countryCodeValue];
+  let reqData = {};
+  if (requestInputValue !== "") {
+    reqData.keyword = requestInputValue
+  }
+  if (countryCodeValue !== "") {
+    reqData.countryCode = countryCodeValue
+  }
+
+
+  eventProcessing.standardRequest(reqData);
 }
