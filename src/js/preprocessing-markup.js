@@ -21,6 +21,6 @@ export function preprocessingMarkup(res) {
     };
     eventsArr.push(cardObj);
   }
-
+  refs.notificationCont.innerHTML = ""
   refs.eventGrid.innerHTML = ('beforeend', eventsGrid(eventsArr));
 }

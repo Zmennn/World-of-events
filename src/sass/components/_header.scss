@@ -1,111 +1,117 @@
-
 .header__content {
- position: relative;
-   
+  position: relative;
+
   @include desktop {
-   padding-bottom: 133px;   
-  }
-  
-  @include tablet  {
-    padding-bottom: 123px;   
+    padding-bottom: 133px;
   }
 
-  @include  mobile {
+  @include tablet {
+    padding-bottom: 123px;
+  }
+
+  @include mobile {
     padding-bottom: 52px;
   }
 
   @include mini {
-    padding-bottom: 32px;  
+    padding-bottom: 32px;
   }
-
 }
 
-
-.logo {   
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: linear-gradient(136.07deg, rgba(196, 196, 196, 0.03) 10.75%, rgba(196, 196, 196, 0) 92.33%);
-    backdrop-filter: blur(30px);
-    border-bottom-right-radius: 250px;
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(
+    136.07deg,
+    rgba(196, 196, 196, 0.03) 10.75%,
+    rgba(196, 196, 196, 0) 92.33%
+  );
+  backdrop-filter: blur(30px);
+  border-bottom-right-radius: 250px;
 }
 
 .icon-logo {
-    @include desktop {
+  @include desktop {
     width: 239px;
     height: 201px;
-}
-    @include tablet {
+  }
+  @include tablet {
     width: 180px;
     height: 151px;
-    }
+  }
 
-    @include mobile {
+  @include mobile {
     width: 106px;
-    height: 90px;   
-    } 
+    height: 90px;
+  }
 
-    @include mini {
+  @include mini {
     width: 106px;
-    height: 90px;  
-    }
+    height: 90px;
+  }
 }
 
+.header__item {
+  text-align: center;
+  margin: 0 auto;
+  text-transform: uppercase;
+  font-family: var(--main-font);
+  color: var(--accent-color);
+  line-height: 1.22;
 
-
-.header__item{
-    text-align: center;
-    margin: 0 auto;
-    text-transform: uppercase;
-    font-family: var(--main-font);
-    color: var(--accent-color);
-    line-height: 1.22;
-    
-    @include desktop {  
+  @include desktop {
     max-width: 600px;
-    padding-top: 40px; 
+    padding-top: 40px;
     padding-bottom: 52px;
-    }
+  }
 
-    @include tablet {
+  @include tablet {
     max-width: 353px;
-    padding-top: 40px; 
-    padding-bottom: 27px; 
-    }
+    padding-top: 40px;
+    padding-bottom: 27px;
+  }
 
-    @include mobile {
+  @include mobile {
     padding-top: 78px;
-    padding-bottom: 25px;   
-    max-width: 212px; 
-    }
+    padding-bottom: 25px;
+    max-width: 212px;
+  }
 
-    @include mini  {
+  @include mini {
     padding-top: 78px;
-    padding-bottom: 25px;   
-    max-width: 212px;   
-    }
+    padding-bottom: 25px;
+    max-width: 212px;
+  }
 }
 
-.header__title {
-    font-weight: 900;
+.header__title,
+.notification__text {
+  font-weight: 900;
 
-    @include desktop {
-        font-size: 50px;
-        }
+  @include desktop {
+    font-size: 50px;
+  }
 
-    @include tablet {
-        font-size: 30px;
-    }
-        
-    @include mobile {
-        font-size: 18px;   
-    }
+  @include tablet {
+    font-size: 30px;
+  }
 
-    @include mini {
-        font-size: 18px; 
-    }
+  @include mobile {
+    font-size: 18px;
+  }
+
+  @include mini {
+    font-size: 18px;
+  }
 }
 
 .animate__animated.animate__fadeInDown {
-    --animate-duration: 2s;
-  }
+  --animate-duration: 2s;
+}
+
+.notification__text {
+  color: var(--accent-color);
+  text-align: center;
+  line-height: 2.22;
+}

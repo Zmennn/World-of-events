@@ -11,6 +11,8 @@ import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
 import { firstVisit } from './js/page-first-visit.js';
 import btnMoreAuthor from './js/btnMoreAuthor.js';
+import notification from './js/customNotification.js'
+
 
 firstVisit();
 
@@ -40,7 +42,7 @@ export const responseProcessing = {
 
     //обработчик инфы с сервера по наличию данных
     if (res.data.page.totalPages < 1) {
-      throw 'No information for this request';
+      throw 'Unfortunately no events found';
     }
 
     if (this.cleaningPermission) {
@@ -89,7 +91,7 @@ export const eventProcessing = {
     fetchObj
       .creatingRequest(this.dataRequest)
       .then(res => responseProcessing.resHandler(res))
-      .catch(err => onErrorNotification(err));
+      .catch(err => notification(err, true));
   },
 
   //метод запроса без очистки(пагинация)
@@ -105,7 +107,7 @@ export const eventProcessing = {
     fetchObj
       .creatingRequest(this.dataRequest)
       .then(res => responseProcessing.resHandler(res))
-      .catch(err => onErrorNotification(err));
+      .catch(err => notification('Something went wrong', false));
   },
 };
 
@@ -132,7 +134,7 @@ userCountry().then(response => {
           //сохранение отображенной базы данных
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
-          //заменим на вызов пагинашки
+
 
           //вызов пагинации
           pagination(res.data.page.totalPages);
@@ -155,5 +157,5 @@ userCountry().then(response => {
         pagination(res.data.page.totalPages)
       }
     })
-    .catch(err => onErrorNotification(err));
+    .catch(err => notification(err));
 });
