@@ -11,13 +11,18 @@ let array = [];
 
 
 export default function pagination(pages) {
-    refs.output.removeEventListener('click', onClickShort);
-    refs.output.removeEventListener('click', onClick);
-    pages > 7 ? paginationLong(pages) : paginationShort(pages);
+    if (pages !== 0) {
+        
+        refs.output.removeEventListener('click', onClickShort);
+        refs.output.removeEventListener('click', onClick);
+        pages > 7 ? paginationLong(pages) : paginationShort(pages);
 
-    const first = document.querySelector('.pagination__link');
-    first.classList.add('pagination__item--current');
-
+        const first = document.querySelector('.pagination__link');
+        first.classList.add('pagination__item--current');
+    } else {
+        refs.output.innerHTML = " ";
+        return;
+    }
 }
 
 function paginationShort(pages) {
