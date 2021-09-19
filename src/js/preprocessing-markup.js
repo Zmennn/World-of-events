@@ -18,7 +18,9 @@ export function preprocessingMarkup(res) {
       date: event.dates.start.localDate
         ? event.dates.start.localDate
         : 'No data',
-      address: event._embedded ? event._embedded.venues[0].name : 'No data',
+      address: event._embedded.venues[0].name
+        ? event._embedded.venues[0].name
+        : event._embedded.venues[0].address.line1,
       image: currentImg,
     };
     eventsArr.push(cardObj);
