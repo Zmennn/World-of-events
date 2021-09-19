@@ -12,6 +12,11 @@ import openModal from './js/openModal.js';
 import btnMoreAuthor from './js/btnMoreAuthor.js';
 import notification from './js/customNotification.js';
 
+import 'animate.css';
+
+firstVisit();
+
+
 //ниже руками не касаться !!! я его 2 дня уговаривал работать
 
 //обработка ответа сервера
@@ -118,7 +123,14 @@ userCountry().then(response => {
         fetchObj.creatingRequest(firstRequest).then(res => {
           //команда на отрисовку
           preprocessingMarkup(res);
-          /// и сюда
+
+
+          const eventsItems = document.querySelectorAll('.event-grid__item');
+          console.log(eventsItems, ' if ');
+          for (const item of eventsItems) {
+            item.classList.add('animation');
+          }
+
           //сохранение отображенной базы данных
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
@@ -128,7 +140,13 @@ userCountry().then(response => {
       } else {
         //команда на отрисовку
         preprocessingMarkup(res);
-        /// сюда
+
+
+        const eventsItems = document.querySelectorAll('.event-grid__item');
+        for (const item of eventsItems) {
+          item.classList.add('animation');
+        }
+
         //сохранение запроса
         eventProcessing.dataRequest = firstRequest;
 
