@@ -11,8 +11,8 @@ import { preprocessingMarkup } from './js/preprocessing-markup.js';
 import openModal from './js/openModal.js';
 import { firstVisit } from './js/page-first-visit.js';
 import btnMoreAuthor from './js/btnMoreAuthor.js';
-import notification from './js/customNotification.js'
-
+import notification from './js/customNotification.js';
+import 'animate.css';
 
 firstVisit();
 
@@ -38,8 +38,6 @@ export const responseProcessing = {
 
   //обработчик инфы с сервера
   resHandler(res) {
-
-
     //обработчик инфы с сервера по наличию данных
     if (res.data.page.totalPages < 1) {
       throw 'Unfortunately no events found';
@@ -71,18 +69,14 @@ export const responseProcessing = {
 
 //Обрабатываем события интерфейса
 export const eventProcessing = {
-
   //хранилище последнего запроса
   dataRequest: {},
 
   //метод запроса с очисткой
   standardRequest(data) {
-
-
     //сохраним последний запрос
     this.dataRequest = {};
     this.dataRequest = data;
-
 
     //разрешим очистку разметки
     responseProcessing.cleanPermission();
@@ -96,9 +90,8 @@ export const eventProcessing = {
 
   //метод запроса без очистки(пагинация)
   paginationRequest(data) {
-
     //добавим данные o номере страницы в объект запроса
-    this.dataRequest.page = (data - 1);
+    this.dataRequest.page = data - 1;
 
     //запретим очистку разметки
     responseProcessing.cleanBan();
@@ -123,38 +116,39 @@ userCountry().then(response => {
       if (res.data.page.totalElements < 1) {
         firstRequest = { countryCode: 'US', keyword: 'festival' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
-        //сохранение запроса 
+        //сохранение запроса
         eventProcessing.dataRequest = firstRequest;
 
         fetchObj.creatingRequest(firstRequest).then(res => {
-
           //команда на отрисовку
           preprocessingMarkup(res);
 
+          const eventsItems = document.querySelectorAll('.event-grid__item');
+          console.log(eventsItems, ' if ');
+          for (const item of eventsItems) {
+            item.classList.add('animation');
+          }
           //сохранение отображенной базы данных
           responseProcessing.allDataMarkup = res.data._embedded.events;
 
-
-
           //вызов пагинации
           pagination(res.data.page.totalPages);
-
-
         });
       } else {
-
         //команда на отрисовку
         preprocessingMarkup(res);
 
-        //сохранение запроса 
+        const eventsItems = document.querySelectorAll('.event-grid__item');
+        for (const item of eventsItems) {
+          item.classList.add('animation');
+        }
+        //сохранение запроса
         eventProcessing.dataRequest = firstRequest;
-
 
         //сохранение отображенной базы данных
         responseProcessing.allDataMarkup = res.data._embedded.events;
 
-
-        pagination(res.data.page.totalPages)
+        pagination(res.data.page.totalPages);
       }
     })
     .catch(err => notification(err));
