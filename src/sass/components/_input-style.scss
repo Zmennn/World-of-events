@@ -35,7 +35,8 @@ form {
 input[id='myInput'] {
   padding-left: 10px;
   background-color: #504e4e;
-  width: 210px;
+  min-width: 210px;
+
   height: 30px;
   color: hsl(0, 4%, 70%);
   font-size: 16px;
@@ -44,6 +45,17 @@ input[id='myInput'] {
   font-size: 14px;
   line-height: 20px;
   text-align: start;
+
+  @include tablet {
+    min-width: 218px;
+    margin-left: 5px;
+  }
+
+  @include mobile {
+    min-width: 218px;
+    margin-left: 5px;
+    background-color: rgb(95, 93, 93);
+  }
 }
 input[id='myInput']::placeholder {
   color: var(--input-placeholder-footer);
@@ -122,20 +134,24 @@ input[id='myInput']::placeholder {
 
 .show {
   display: block;
-  background: var(--input-bgr-color);
-  backdrop-filter: blur(20px);
   position: absolute;
   left: 6%;
   border: none;
   cursor: pointer;
   background: var(--input-bgr-color);
-  backdrop-filter: blur(20px);
-  min-width: 238px;
+  backdrop-filter: contrast(3) blur(20px);
+  width: 238px;
   padding: 5px;
-
   height: 200px;
-  overflow-y: scroll;
+  overflow-y: auto;
   z-index: 1;
+
+  @include mobile {
+    background: var(--input-bgr-color);
+    backdrop-filter: contrast(5) blur(200px);
+    min-width: 230px;
+    left: 6%;
+  }
 }
 
 .name-list {
