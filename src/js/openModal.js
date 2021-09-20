@@ -27,7 +27,7 @@ const modalRefs = {
 
     imageRound: document.querySelector('.modal-img-round'),
     image: document.querySelector('.modal-img'),
-    
+
 }
 
 
@@ -54,7 +54,7 @@ function onModalOpen(e) {
     const dataFromModal = responseProcessing.allDataMarkup.filter(
         el => el.id === e.target.dataset.id)[0];
     console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
-
+    console.log(dataFromModal?.priceRanges ? (dataFromModal.priceRanges[1] ? dataFromModal.priceRanges[1].type : '--') : '--');
 
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
@@ -73,10 +73,10 @@ function onModalOpen(e) {
     modalRefs.priceMinVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.min.length && dataFromModal.priceRanges[1]?.min || ' ');
     modalRefs.priceMaxVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.max.length && dataFromModal.priceRanges[1]?.max || ' ');
     modalRefs.priceCurVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.currency.length && dataFromModal?.priceRanges[1]?.currency || ' ');
-    
+
 
     modalRefs.openModal.classList.remove('visually-hidden');
-     
+
 
 }
 
