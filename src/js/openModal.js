@@ -21,7 +21,7 @@ const modalRefs = {
     priceCurStand: document.querySelector('.price-currency-standart'),
 
     priceTypeVip: document.querySelector('.price-type-vip'),
-    priceMinSVip: document.querySelector('.price-min-vip'),
+    priceMinVip: document.querySelector('.price-min-vip'),
     priceMaxVip: document.querySelector('.price-max-vip'),
     priceCurVip: document.querySelector('.price-currency-vip'),
 
@@ -58,33 +58,47 @@ function onModalOpen(e) {
     const dataFromModal = responseProcessing.allDataMarkup.filter(
         el => el.id === e.target.dataset.id)[0];
     console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
-    console.log(dataFromModal?.priceRanges ? (dataFromModal.priceRanges[1] ? dataFromModal.priceRanges[1].type : '--') : '--');
+    // console.log(1, dataFromModal?.priceRanges);
+    // console.log(dataFromModal?.priceRanges ? (dataFromModal.priceRanges[1] ? dataFromModal.priceRanges[1].type : '--') : '--');
 
     onBodyContentOpen();
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
-    
 
-    // modalRefs.imageRound.src = dataFromModal?.images?.length && dataFromModal.images[5] && dataFromModal.images[5].url || ' ';
-    // modalRefs.image.src = dataFromModal?.images?.length && dataFromModal.images[5] && dataFromModal.images[5].url || ' ';
-    // modalRefs.name.innerHTML = ('beforeend', dataFromModal?.name.length && dataFromModal?.name || ' ');
-    // modalRefs.info.innerHTML = ('beforeend', dataFromModal?.promoter?.description.length && dataFromModal?.promoter?.description || ' ');
-    // modalRefs.date.innerHTML = ('beforeend', dataFromModal?.dates.start?.localDate.length && dataFromModal?.dates.start?.localDate || ' ');
-    // modalRefs.where.innerHTML = ('beforeend', dataFromModal?._embedded?.venues[0]?.name.length && dataFromModal?._embedded?.venues[0]?.name || ' ');
-    // modalRefs.priceTypeStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.type.length && dataFromModal?.priceRanges[0]?.type || ' ');
-    // modalRefs.priceMinStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.min.length && dataFromModal.priceRanges[0]?.min || ' ');
-    // modalRefs.priceMaxStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.max.length && dataFromModal.priceRanges[0]?.max || ' ');
-    // modalRefs.priceCurStand.innerHTML = ('beforeend', dataFromModal?.priceRanges?.currency.length && dataFromModal.priceRanges[0]?.currency || ' ');
-    // modalRefs.priceTypeVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.length && dataFromModal.priceRanges[1]?.type || ' ');
-    // modalRefs.priceMinVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.min.length && dataFromModal.priceRanges[1]?.min || ' ');
-    // modalRefs.priceMaxVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.max.length && dataFromModal.priceRanges[1]?.max || ' ');
-    // modalRefs.priceCurVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.currency.length && dataFromModal?.priceRanges[1]?.currency || ' ');
+    const priceRangesArr = dataFromModal?.priceRanges;
+    const imgArr = dataFromModal?.images;
 
+    function getCurrentImage(value) {
+        let currentImg = value?.length && value[1]?.url || 'img';
+        for (const image of value) {
+          if (image.width === 360 && image.ratio === '4_3') {
+            currentImg = image.url;
+          }
+        }
+        return currentImg;
+    }
 
+    const finalImg = getCurrentImage(imgArr);
+
+    modalRefs.imageRound.src = finalImg;
+    modalRefs.image.src = finalImg;
+    modalRefs.name.innerHTML = ('beforeend', dataFromModal?.name || 'no data');
+    modalRefs.info.innerHTML = ('beforeend', dataFromModal?.promoter?.description || 'no data');
+    modalRefs.date.innerHTML = ('beforeend', dataFromModal?.dates?.start?.localDate || 'no data');
+    modalRefs.where.innerHTML = ('beforeend', dataFromModal?._embedded?.venues?.length && dataFromModal._embedded.venues[0]?.name || 'no data');
+    modalRefs.priceTypeStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.type || 'type');
+    modalRefs.priceMinStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.min || 'min');
+    modalRefs.priceMaxStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.max || 'max');
+    modalRefs.priceCurStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.currency || 'cur');
+    modalRefs.priceTypeVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.type || 'type');
+    modalRefs.priceMinVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.min || 'min');
+    modalRefs.priceMaxVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.max || 'max');
+    modalRefs.priceCurVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.currency || 'cur');
     modalRefs.openModal.classList.remove('visually-hidden');
 
-
 }
+
+
 
 function onBodyContentOpen(e) {
     modalRefs.body.classList.add('body__open-modal');
