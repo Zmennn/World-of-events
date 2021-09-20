@@ -36,9 +36,6 @@ modalRefs.picture.addEventListener('click', onModalOpen);//клик с гале�
 modalRefs.closeModal.addEventListener('click', onModalClose);//клик с крестика
 window.addEventListener('keyup', modalCloseESC);//еск
 modalRefs.overlay.addEventListener('click', onModalClose);//клик с оверлея
-// modalRefs.body.addEventListener('click', onBodyContentOpen);//тупо все клики
-//modalRefs.body.addEventListener('click', onBodyContentClose);
-
 
 
 function onModalOpen(e) {
@@ -60,7 +57,7 @@ function onModalOpen(e) {
     console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
     console.log(dataFromModal?.priceRanges ? (dataFromModal.priceRanges[1] ? dataFromModal.priceRanges[1].type : '--') : '--');
 
-    // onBodyContentOpen();
+    
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
     modalRefs.body.classList.add('body__open-modal');
@@ -83,12 +80,8 @@ function onModalOpen(e) {
 
     modalRefs.openModal.classList.remove('visually-hidden');
 
-
 }
 
-// function onBodyContentOpen(e) {
-//     modalRefs.body.classList.add('body__open-modal');
-// }
 
 function close() {
     modalRefs.overlay.classList.remove('overlay');
@@ -104,15 +97,6 @@ function onModalClose(e) {
             e.target.classList.contains('modal-window'))) {
         close();
     }
-    // // modalRefs.body.classList.replace('body__open-modal', 'body__close-modal');
-    // modalRefs.overlay.classList.remove('overlay');
-
-    // modalRefs.openModal.classList.add('visually-hidden');
-    // modalRefs.body.classList.remove('body__close-modal');
-
-
-
-
 }
 
 
@@ -126,7 +110,6 @@ function modalCloseESC(e) {
     if (e.key !== 'Escape') {
         return;
     }
-
     close();
 }
 
