@@ -12,7 +12,7 @@ let array = [];
 
 export default function pagination(pages) {
     if (pages !== 0) {
-        
+
         refs.output.removeEventListener('click', onClickShort);
         refs.output.removeEventListener('click', onClick);
         pages > 7 ? paginationLong(pages) : paginationShort(pages);
@@ -59,7 +59,7 @@ function onClickShort(e) {
         }
     }
 
-    console.log('current page:', currPage);
+
     eventProcessing.paginationRequest(currPage)
     return currPage;
 }

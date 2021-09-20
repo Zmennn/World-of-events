@@ -121,7 +121,7 @@ userCountry().then(response => {
           preprocessingMarkup(res);
 
           const eventsItems = document.querySelectorAll('.event-grid__item');
-          console.log(eventsItems, ' if ');
+
           for (const item of eventsItems) {
             item.classList.add('animation');
           }
