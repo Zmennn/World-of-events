@@ -6,6 +6,7 @@ export function preprocessingMarkup(res) {
   const eventsArr = [];
 
   for (const event of res.data._embedded.events) {
+    console.log('event', event);
     let currentImg = event.images[0].url;
     for (const image of event.images) {
       if (image.width === 305 && image.ratio === '4_3') {
@@ -18,9 +19,9 @@ export function preprocessingMarkup(res) {
       date: event.dates.start.localDate
         ? event.dates.start.localDate
         : 'No data',
-      address: event._embedded.venues[0].name
+      address: event._embedded
         ? event._embedded.venues[0].name
-        : event._embedded.venues[0].address.line1,
+        : event.place.address.line1,
       image: currentImg,
     };
     eventsArr.push(cardObj);
