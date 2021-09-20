@@ -32,11 +32,11 @@ const modalRefs = {
 }
 
 
-modalRefs.picture.addEventListener('click', onModalOpen);
-modalRefs.closeModal.addEventListener('click', onModalClose);
-window.addEventListener('keyup', modalCloseESC);
-modalRefs.overlay.addEventListener('click', onModalClose);
-modalRefs.body.addEventListener('click', onBodyContentOpen);
+modalRefs.picture.addEventListener('click', onModalOpen);//клик с галереи
+modalRefs.closeModal.addEventListener('click', onModalClose);//клик с крестика
+window.addEventListener('keyup', modalCloseESC);//еск
+modalRefs.overlay.addEventListener('click', onModalClose);//клик с оверлея
+// modalRefs.body.addEventListener('click', onBodyContentOpen);//тупо все клики
 //modalRefs.body.addEventListener('click', onBodyContentClose);
 
 
@@ -60,10 +60,10 @@ function onModalOpen(e) {
     console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
     console.log(dataFromModal?.priceRanges ? (dataFromModal.priceRanges[1] ? dataFromModal.priceRanges[1].type : '--') : '--');
 
-    onBodyContentOpen();
+    // onBodyContentOpen();
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
-    
+    modalRefs.body.classList.add('body__open-modal');
 
     // modalRefs.imageRound.src = dataFromModal?.images?.length && dataFromModal.images[5] && dataFromModal.images[5].url || ' ';
     // modalRefs.image.src = dataFromModal?.images?.length && dataFromModal.images[5] && dataFromModal.images[5].url || ' ';
@@ -86,9 +86,9 @@ function onModalOpen(e) {
 
 }
 
-function onBodyContentOpen(e) {
-    modalRefs.body.classList.add('body__open-modal');
-}
+// function onBodyContentOpen(e) {
+//     modalRefs.body.classList.add('body__open-modal');
+// }
 
 function close() {
     modalRefs.overlay.classList.remove('overlay');
@@ -98,19 +98,21 @@ function close() {
 
 
 function onModalClose(e) {
-    if ((!e.currentTarget.classList.contains('btn-close')) &&
-    (!e.target.classList.contains ('btn-more-from')) &&
-    (!e.target.classList.contains('overlay') ||
-    e.target.classList.contains('modal-window'))) {
-        return;
+    if ((e.currentTarget.classList.contains('btn-close')) ||
+        (e.target.classList.contains('btn-more-from')) ||
+        (e.target.classList.contains('overlay') ||
+            e.target.classList.contains('modal-window'))) {
+        close();
     }
     // // modalRefs.body.classList.replace('body__open-modal', 'body__close-modal');
     // modalRefs.overlay.classList.remove('overlay');
-    
+
     // modalRefs.openModal.classList.add('visually-hidden');
-    close();
-    modalRefs.body.classList.add('body__close-modal');
- 
+    // modalRefs.body.classList.remove('body__close-modal');
+
+
+
+
 }
 
 
@@ -124,7 +126,7 @@ function modalCloseESC(e) {
     if (e.key !== 'Escape') {
         return;
     }
-    
-   close();
+
+    close();
 }
 
