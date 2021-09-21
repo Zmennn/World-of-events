@@ -58,15 +58,13 @@ function onModalOpen(e) {
     const dataFromModal = responseProcessing.allDataMarkup.filter(
         el => el.id === e.target.dataset.id)[0];
 
-
-
-
     onOverlay();
+
     modalRefs.openModal.classList.add('open-modal');
-
-
     modalRefs.body.classList.add('body__open-modal');
 
+    modalRefs.openModal.classList.add("fadeIn");
+    modalRefs.openModal.classList.remove("fadeOut");
 
 
     const priceRangesArr = dataFromModal?.priceRanges;
@@ -115,7 +113,11 @@ function onBodyContentOpen(e) {
 function close() {
     modalRefs.overlay.classList.remove('overlay');
     modalRefs.body.classList.remove('body__open-modal');
-    modalRefs.openModal.classList.add('visually-hidden');
+    // modalRefs.openModal.classList.add('visually-hidden');
+
+
+    modalRefs.openModal.classList.add("fadeOut");
+    modalRefs.openModal.classList.remove("fadeIn");
 }
 
 
