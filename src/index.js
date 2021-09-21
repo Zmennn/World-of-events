@@ -111,7 +111,7 @@ userCountry().then(response => {
     .creatingRequest(firstRequest)
     .then(res => {
       if (res.data.page.totalElements < 1) {
-        firstRequest = { countryCode: 'US', keyword: 'festival' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
+        firstRequest = { countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
 
         //сохранение запроса
         eventProcessing.dataRequest = firstRequest;

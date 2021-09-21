@@ -11,6 +11,8 @@ let array = [];
 
 
 export default function pagination(pages) {
+    if (pages > 50) { pages = 50 };
+
     if (pages !== 0) {
 
         refs.output.removeEventListener('click', onClickShort);
