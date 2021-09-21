@@ -1,6 +1,11 @@
 // Общие стили
+.js-overlay {
+    z-index: 1;
+}
+
 .modal-content {
     display: flex;
+    margin: auto;
 }
 
 .modal-container {
@@ -28,7 +33,6 @@
 
 .modal-list {
     margin: -16px 0px -16px 0px;
-    padding: 0px 0px 0px 40px;
 }
 
 .modal-item-text,
@@ -84,7 +88,7 @@
 .price-min-standart::after,
 .price-min-vip::after
  {
-  content: "-";
+  content: " -";
 }
 .modal-item-text-price,
 .modal-item-text {
@@ -113,8 +117,8 @@
     }
     .round-picture img {
         margin: 32px auto 41px auto;
-        max-width: 132px;
-        max-height: 132px;
+        width: 132px;
+        height: 132px;
     }
     .modal-image img {
         max-width: 360px;
@@ -171,8 +175,8 @@
     }
     .round-picture img {
         margin: 28px auto 43px auto;
-        max-width: 70px;
-        max-height: 70px;
+        width: 70px;
+        height: 70px;
     }
     .modal-image img {
         max-width: 233px;
@@ -180,6 +184,7 @@
     }
     .modal-content {
         height: 546px;
+        width: 495px;
     }
     .modal-main-info {
         max-width: 265px;
@@ -233,9 +238,9 @@
         border-radius: 150px 0px;
     }
     .round-picture img {
-        margin: 72px auto 18px auto;
-        max-width: 102px;
-        max-height: 102px;
+        margin: 72px auto 25px auto;
+        width: 102px;
+        height: 102px;
     }
     .modal-image img {
         display: none;
