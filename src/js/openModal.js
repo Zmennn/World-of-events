@@ -57,7 +57,7 @@ function onModalOpen(e) {
 
     const dataFromModal = responseProcessing.allDataMarkup.filter(
         el => el.id === e.target.dataset.id)[0];
-    // console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
+
 
 
 
