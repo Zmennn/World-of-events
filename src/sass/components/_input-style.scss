@@ -95,6 +95,9 @@ input[id='myInput']::placeholder {
   font-size: 16px;
   line-height: 20px;
   text-align: start;
+  @include mini {
+    width: 250px;
+  }
 }
 
 .input-event {
@@ -103,6 +106,10 @@ input[id='myInput']::placeholder {
 
   @include mobile {
     margin-bottom: 25px;
+    margin-right: 0;
+  }
+  @include mini {
+    margin-bottom: 20px;
     margin-right: 0;
   }
 }
@@ -148,8 +155,15 @@ input[id='myInput']::placeholder {
 
   @include mobile {
     background: var(--input-bgr-color);
-    backdrop-filter: contrast(5) blur(200px);
+    backdrop-filter: contrast(5) blur(230px);
     min-width: 230px;
+    left: 6%;
+  }
+
+  @include mini {
+    background: var(--input-bgr-color);
+    backdrop-filter: contrast(5) blur(220px);
+    max-width: 220px;
     left: 6%;
   }
 }
