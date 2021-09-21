@@ -29,6 +29,9 @@ const modalRefs = {
     image: document.querySelector('.modal-img'),
     body: document.querySelector('body'),
 
+    buyStandartTicketBtn: document.querySelector('.btn-buy-standart'),
+    buyVipTicketBtn: document.querySelector('.btn-buy-vip')
+
 }
 
 
@@ -96,6 +99,8 @@ function onModalOpen(e) {
     modalRefs.priceMaxVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.max || '-');
     modalRefs.priceCurVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.currency || '');
     modalRefs.openModal.classList.remove('visually-hidden');
+    modalRefs.buyStandartTicketBtn.setAttribute('data-link', `${dataFromModal.url}`)
+    modalRefs.buyVipTicketBtn.setAttribute('data-link', `${dataFromModal.url}`)
 
 }
 
@@ -136,4 +141,3 @@ function modalCloseESC(e) {
     }
     close();
 }
-
