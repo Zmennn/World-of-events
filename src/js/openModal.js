@@ -32,14 +32,17 @@ const modalRefs = {
 }
 
 
-modalRefs.picture.addEventListener('click', onModalOpen);//клик с галереи
-modalRefs.closeModal.addEventListener('click', onModalClose);//клик с крестика
-window.addEventListener('keyup', modalCloseESC);//еск
-modalRefs.overlay.addEventListener('click', onModalClose);//клик с оверлея
+modalRefs.picture.addEventListener('click', onModalOpen); //клик с галереи
+modalRefs.closeModal.addEventListener('click', onModalClose); //клик с крестика
+window.addEventListener('keyup', modalCloseESC); //еск
+modalRefs.overlay.addEventListener('click', onModalClose); //клик с оверлея
+
+
 
 
 function onModalOpen(e) {
     e.preventDefault();
+    onAnimationOpen();
 
     if (!e.target.classList.contains('card__img') &&
         !e.target.classList.contains('card') &&
@@ -58,7 +61,7 @@ function onModalOpen(e) {
     // console.log(1, dataFromModal?.priceRanges);
     // console.log(dataFromModal?.priceRanges ? (dataFromModal.priceRanges[1] ? dataFromModal.priceRanges[1].type : '--') : '--');
 
-    
+
     onOverlay();
     modalRefs.openModal.classList.add('open-modal');
 
@@ -81,36 +84,37 @@ function onModalOpen(e) {
     // modalRefs.priceCurVip.innerHTML = ('beforeend', dataFromModal?.priceRanges?.currency.length && dataFromModal?.priceRanges[1]?.currency || ' ');
 
 
-    const priceRangesArr = dataFromModal?.priceRanges;
-    const imgArr = dataFromModal?.images;
+    // const priceRangesArr = dataFromModal ? .priceRanges;
+    // const imgArr = dataFromModal ? .images;
 
-    function getCurrentImage(value) {
-        let currentImg = value?.length && value[1]?.url || 'img';
-        for (const image of value) {
-          if (image.width === 360 && image.ratio === '4_3') {
-            currentImg = image.url;
-          }
-        }
-        return currentImg;
-    }
+    // function getCurrentImage(value) {
+    //     let currentImg = value ? .length && value[1] ? .url || 'img';
+    //     for (const image of value) {
+    //         if (image.width === 360 && image.ratio === '4_3') {
+    //             currentImg = image.url;
+    //         }
+    //     }
+    //     return currentImg;
+    // }
 
-    const finalImg = getCurrentImage(imgArr);
+    // const finalImg = getCurrentImage(imgArr);
 
-    modalRefs.imageRound.src = finalImg;
-    modalRefs.image.src = finalImg;
-    modalRefs.name.innerHTML = ('beforeend', dataFromModal?.name || 'no data');
-    modalRefs.info.innerHTML = ('beforeend', dataFromModal?.promoter?.description || 'no data');
-    modalRefs.date.innerHTML = ('beforeend', dataFromModal?.dates?.start?.localDate || 'no data');
-    modalRefs.where.innerHTML = ('beforeend', dataFromModal?._embedded?.venues?.length && dataFromModal._embedded.venues[0]?.name || 'no data');
-    modalRefs.priceTypeStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.type || 'type');
-    modalRefs.priceMinStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.min || 'min');
-    modalRefs.priceMaxStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.max || 'max');
-    modalRefs.priceCurStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.currency || 'cur');
-    modalRefs.priceTypeVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.type || 'type');
-    modalRefs.priceMinVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.min || 'min');
-    modalRefs.priceMaxVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.max || 'max');
-    modalRefs.priceCurVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.currency || 'cur');
+    // modalRefs.imageRound.src = finalImg;
+    // modalRefs.image.src = finalImg;
+    // modalRefs.name.innerHTML = ('beforeend', dataFromModal ? .name || 'no data');
+    // modalRefs.info.innerHTML = ('beforeend', dataFromModal ? .promoter ? .description || 'no data');
+    // modalRefs.date.innerHTML = ('beforeend', dataFromModal ? .dates ? .start ? .localDate || 'no data');
+    // modalRefs.where.innerHTML = ('beforeend', dataFromModal ? ._embedded ? .venues ? .length && dataFromModal._embedded.venues[0] ? .name || 'no data');
+    // modalRefs.priceTypeStand.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[0] ? .type || 'type');
+    // modalRefs.priceMinStand.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[0] ? .min || 'min');
+    // modalRefs.priceMaxStand.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[0] ? .max || 'max');
+    // modalRefs.priceCurStand.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[0] ? .currency || 'cur');
+    // modalRefs.priceTypeVip.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[1] ? .type || 'type');
+    // modalRefs.priceMinVip.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[1] ? .min || 'min');
+    // modalRefs.priceMaxVip.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[1] ? .max || 'max');
+    // modalRefs.priceCurVip.innerHTML = ('beforeend', priceRangesArr ? .length && priceRangesArr[1] ? .currency || 'cur');
     modalRefs.openModal.classList.remove('visually-hidden');
+
 
 }
 
@@ -126,22 +130,26 @@ function close() {
     modalRefs.overlay.classList.remove('overlay');
     modalRefs.body.classList.remove('body__open-modal');
     modalRefs.openModal.classList.add('visually-hidden');
+    onAnimationClose();
 }
 
 
 function onModalClose(e) {
+
     if ((e.currentTarget.classList.contains('btn-close')) ||
         (e.target.classList.contains('btn-more-from')) ||
         (e.target.classList.contains('overlay') ||
             e.target.classList.contains('modal-window'))) {
         close();
-    }
-}
 
+    }
+
+}
 
 
 function onOverlay(e) {
     modalRefs.overlay.classList.add('overlay');
+    onAnimationOpen();
 }
 
 
@@ -149,6 +157,25 @@ function modalCloseESC(e) {
     if (e.key !== 'Escape') {
         return;
     }
+
     close();
 }
+const typeAnimate = 'fade';
 
+function onAnimationOpen() {
+    if (typeAnimate === 'fade') {
+        modalRefs.openModal.classList.remove('fadeOut');
+        modalRefs.openModal.classList.add('fadeIn');
+    }
+    modalRefs.overlay.classList.remove('fadeOut');
+    modalRefs.overlay.classList.add('fadeIn');
+}
+
+function onAnimationClose() {
+    if (typeAnimate === 'fade') {
+        modalRefs.overlay.classList.remove('fadeIn');
+        modalRefs.overlay.classList.add('fadeOut');
+    }
+    modalRefs.openModal.classList.remove('fadeIn');
+    modalRefs.openModal.classList.add('fadeOut');
+}
