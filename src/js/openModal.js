@@ -54,7 +54,7 @@ function onModalOpen(e) {
 
     const dataFromModal = responseProcessing.allDataMarkup.filter(
         el => el.id === e.target.dataset.id)[0];
-    console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
+    // console.log("текущий объект, впихнуть в модалку срочно", dataFromModal);
 
 
 
@@ -70,9 +70,9 @@ function onModalOpen(e) {
     const imgArr = dataFromModal?.images;
 
     function getCurrentImage(value) {
-        let currentImg = value?.length && value[1]?.url || 'img';
+        let currentImg = value?.length && value[0]?.url || 'img';
         for (const image of value) {
-            if (image.width === 360 && image.ratio === '4_3') {
+            if (image.height === 683) {
                 currentImg = image.url;
             }
         }
