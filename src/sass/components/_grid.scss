@@ -38,7 +38,8 @@
     top: 8px;
     height: 64px;
   }
-  50%, 100% {
+  50%,
+  100% {
     top: 24px;
     height: 32px;
   }
@@ -46,13 +47,14 @@
 // ---
 
 .event-grid {
+  padding: 0;
   padding-top: 9px;
   margin: 0 auto;
   display: grid;
   justify-content: center;
   max-width: calc(100% - 40px);
   //  если нужно до следующего перелома жестко зафиксить размер карточки
-  grid-template-columns: repeat(1, 138px);
+  grid-template-columns: repeat(1, 194px);
 
   //  если до следующего перелома размер карточки будет растягиваться и их остается 2
   // grid-template-columns: repeat(2, minmax(138px, 1fr));
@@ -60,10 +62,11 @@
   //  если до следующего перелома размер карточки будет фиксированным,
   //  но количество в строке будет увеличиваться
   //  grid-template-columns: repeat(auto-fill, minmax(138px, 1fr));
-  grid-gap: 30px 4px;
+  grid-gap: 30px;
 
   @include mobile {
     grid-template-columns: repeat(2, 138px);
+    grid-gap: 30px 8px;
   }
 
   @include tablet {
@@ -96,18 +99,18 @@
 
   &:hover,
   &:focus {
-  transform: scale(1.08);
-  transition: 500ms;
-}
+    transform: scale(1.08);
+    transition: 500ms;
+  }
 }
 
 .animation {
-  &:nth-child(odd){
+  &:nth-child(odd) {
     animation: fadeInDown;
     animation-duration: 1.5s;
   }
 
-  &:nth-child(even){
+  &:nth-child(even) {
     animation: fadeInUp;
     animation-duration: 1.5s;
   }
