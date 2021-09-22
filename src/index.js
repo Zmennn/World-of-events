@@ -15,6 +15,8 @@ import 'animate.css';
 
 
 
+
+
 //обработка ответа сервера
 export const responseProcessing = {
   //накопитель объектов отрисованной разметки
