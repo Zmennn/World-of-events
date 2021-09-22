@@ -14,7 +14,8 @@ import notification from './js/customNotification.js';
 import 'animate.css';
 
 
-//ниже руками не касаться !!! я его 2 дня уговаривал работать
+
+
 
 //обработка ответа сервера
 export const responseProcessing = {
@@ -102,41 +103,22 @@ export const eventProcessing = {
   },
 };
 
+
+
+let firstRequest
 //обработка первой отрисовки
 userCountry().then(response => {
   const data = response.data;
+
   const country = data.country_code;
-  let firstRequest = { countryCode: country };
+
+  firstRequest = { countryCode: country };
 
   fetchObj
     .creatingRequest(firstRequest)
     .then(res => {
       if (res.data.page.totalElements < 1) {
-        firstRequest = { countryCode: 'US' }; //сюда пихать тестовые запросы объектом типа {countryCode: "US"}
-
-        //сохранение запроса
-        eventProcessing.dataRequest = firstRequest;
-
-        fetchObj.creatingRequest(firstRequest).then(res => {
-          //команда на отрисовку
-          preprocessingMarkup(res);
-
-          const eventsItems = document.querySelectorAll('.event-grid__item');
-
-          for (const item of eventsItems) {
-            item.classList.add('animation');
-          }
-
-          // скрывает прелоадер
-          let preloader = document.querySelector('.preloader');
-          preloader.style.display = 'none';
-
-          //сохранение отображенной базы данных
-          responseProcessing.allDataMarkup = res.data._embedded.events;
-
-          //вызов пагинации
-          pagination(res.data.page.totalPages);
-        });
+        alternativeRequest()
       } else {
         //команда на отрисовку
         preprocessingMarkup(res);
@@ -160,4 +142,37 @@ userCountry().then(response => {
       }
     })
     .catch(err => notification(err));
-});
+})
+  .catch(err => {
+    alternativeRequest()
+  })
+
+
+//обеспечение аварийного вывода при отсутствии данных по стране
+function alternativeRequest() {
+  firstRequest = { countryCode: 'US' };
+
+  //сохранение запроса
+  eventProcessing.dataRequest = firstRequest;
+
+  fetchObj.creatingRequest(firstRequest).then(res => {
+    //команда на отрисовку
+    preprocessingMarkup(res);
+
+    const eventsItems = document.querySelectorAll('.event-grid__item');
+
+    for (const item of eventsItems) {
+      item.classList.add('animation');
+    }
+
+    // скрывает прелоадер
+    let preloader = document.querySelector('.preloader');
+    preloader.style.display = 'none';
+
+    //сохранение отображенной базы данных
+    responseProcessing.allDataMarkup = res.data._embedded.events;
+
+    //вызов пагинации
+    pagination(res.data.page.totalPages);
+  });
+}
