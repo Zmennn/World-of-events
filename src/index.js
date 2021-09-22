@@ -145,6 +145,10 @@ userCountry().then(response => {
           item.classList.add('animation');
         }
 
+        // скрывает прелоадер
+        let preloader = document.querySelector('.preloader');
+        preloader.style.display = 'none';
+
         //сохранение запроса
         eventProcessing.dataRequest = firstRequest;
 
