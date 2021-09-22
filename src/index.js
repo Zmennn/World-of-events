@@ -1,5 +1,5 @@
 import './sass/main.scss';
-import { onErrorNotification } from './pnotify';
+
 import countrySearch from './js/country-search';
 import pagination from './js/pagination';
 import { fetchObj } from './fetch';
