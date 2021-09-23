@@ -79,7 +79,7 @@
   height: 19px;
 }
 .price-type-standart,
-.price-type-standart {
+.price-type-vip {
   text-transform: capitalize;
 }
 .price-min-standart::after,
@@ -90,6 +90,9 @@
 .modal-item-text {
   font-family: Montserrat;
   font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 // .price::before {
@@ -112,7 +115,7 @@
 //////////// Десктоп 1280+ ////////////
 @media screen and (min-width: 1280px) {
   .modal-container {
-    height: 1003px;
+    height: 953px;
     width: 930px;
     padding: 30px 30px 62px 30px;
   }
@@ -164,7 +167,7 @@
     line-height: 20px;
     width: 255px;
     height: 40px;
-    margin: 21px auto 32px auto;
+    margin: 15px auto 20px auto;
   }
 }
 
@@ -207,6 +210,7 @@
     line-height: 20px;
     margin-top: 5px;
     margin-bottom: 10px;
+    margin-left: 30px;
   }
 
   .btn-close {
@@ -228,13 +232,15 @@
   .ticket-icon {
     width: 24px;
     height: 16px;
+    position: absolute;
+    right: 34%;
   }
 }
 
 //////////// Мобилка 320-767.98 ////////////
 @media screen and (max-width: 767.98px) and (min-width: 320px) {
   .modal-container {
-    height: 915px;
+    height: 815px;
     width: 272px;
     border-radius: 150px 0px;
   }
@@ -266,6 +272,7 @@
     line-height: 20px;
     margin-top: 5px;
     margin-bottom: 10px;
+    margin-left: 5px;
   }
   .btn-buy {
     margin-bottom: 15px;
@@ -288,6 +295,8 @@
   .ticket-icon {
     width: 24px;
     height: 16px;
+    position: absolute;
+    right: 80%;
   }
 }
 

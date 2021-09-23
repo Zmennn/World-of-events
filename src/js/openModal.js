@@ -89,13 +89,13 @@ function onModalOpen(e) {
     modalRefs.date.innerHTML = ('beforeend', dataFromModal?.dates?.start?.localDate || 'no data');
     modalRefs.where.innerHTML = ('beforeend', dataFromModal?._embedded?.venues?.length && dataFromModal._embedded.venues[0]?.name || 'no data');
     modalRefs.priceTypeStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.type || 'no data');
-    modalRefs.priceMinStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.min || '-');
-    modalRefs.priceMaxStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.max || '-');
-    modalRefs.priceCurStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.currency || '');
+    modalRefs.priceMinStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.min || '---');
+    modalRefs.priceMaxStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.max || '---');
+    modalRefs.priceCurStand.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[0]?.currency || '---');
     modalRefs.priceTypeVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.type || 'no data');
-    modalRefs.priceMinVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.min || '-');
-    modalRefs.priceMaxVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.max || '-');
-    modalRefs.priceCurVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.currency || '');
+    modalRefs.priceMinVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.min || '---');
+    modalRefs.priceMaxVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.max || '---');
+    modalRefs.priceCurVip.innerHTML = ('beforeend', priceRangesArr?.length && priceRangesArr[1]?.currency || '---');
     modalRefs.openModal.classList.remove('visually-hidden');
     modalRefs.buyStandartTicketBtn.setAttribute('data-link', `${dataFromModal.url}`)
     modalRefs.buyVipTicketBtn.setAttribute('data-link', `${dataFromModal.url}`)
