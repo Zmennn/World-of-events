@@ -12,6 +12,6 @@ function onBtnMoreClick(e) {
     }
     const eventName = document.querySelector('.modal-item-text-who')
     const authorName = eventName.textContent;
-    console.log(authorName);
+
     eventProcessing.standardRequest({ keyword: authorName })
 }
